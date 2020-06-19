@@ -3,16 +3,19 @@ let positions;
 let videoInput;
 let tf="...........................";
 let cnv
+let outputArea = 0;
+let outputSmile = 0;
 
 function setup() {
 
   // setup camera capture
   videoInput = createCapture(VIDEO);
-  videoInput.size(400, 300);
+  videoInput.size(1000, 800);
+  drawBack();
   videoInput.position(0, 0);
   
   // setup canvas
-  cnv = createCanvas(400, 300);
+  cnv = createCanvas(1000, 800);
   cnv.position(0, 0);
 
   // setup tracker
@@ -20,23 +23,49 @@ function setup() {
   ctracker.init(pModel);
   ctracker.start(videoInput.elt);
   
+  // setup emotion classifier
   classifier = new emotionClassifier();
   classifier.init(emotionModel);
   emotionData = classifier.getBlank();
   
-  fill(255);
-
   tf=tf.split('');
-  console.log(text);
 }
+
+function drawBack() {
+  background(55)
+  fill(77, 111, 33);
+  noStroke();
+}
+
 
 let j=0;
 
 function draw() {
-  clear();
 
+  clear();
+  drawBack();
+
+  proximity = round(outputArea * 100);
+  thisAngle = map(proximity, 0, 100, .5, 10);
+  thisHeight = map(proximity, 0, 100, 50, 250);
+  thisBloom = map(round(outputSmile * 100), 0, 100, 10, 1);
+
+
+
+  push();
+  translate(0, height * 0.9);
+  for (let i = 1; i < 2; i++) {
+    translate(width/2, 0);
+    push();
+    branch(thisHeight);
+    pop();
+  }
+  pop();
+  
   if (videoInput) {
-    image(videoInput, 0, 0, width, width * videoInput.height / videoInput.width)
+    translate(videoInput.width, 0);
+    scale(-1, 1);
+    // image(videoInput, 0, 0, width, width * videoInput.height / videoInput.width)
   }
   // get array of face marker positions [x, y] format
   positions = ctracker.getCurrentPosition();
@@ -44,12 +73,15 @@ function draw() {
   
   emotionRecognition = classifier.meanPredict(parameters)
   
+
+
   if (positions) {
     
     push();
-    textSize(36);
+    textSize(18);
     textAlign(CENTER);
-    text('Smile = ' + round(emotionRecognition[5].value * 100) + '%', width/2, height/2)
+    outputSmile = emotionRecognition[5].value;
+    console.log('Smile = ' + round(outputSmile * 100) + '%')
     pop();
   
     
@@ -87,21 +119,51 @@ function draw() {
 
     boxWidth = maxX-minX;
     boxHeight = maxY-minY;
-    area = (boxWidth * boxHeight) / (width * height);
+    outputArea = (boxWidth * boxHeight) / (width * height);
 
     push();
-    textSize(36);
+    textSize(18);
     textAlign(CENTER);
-    text('Proximity = ' + round(area * 100) + '%', width/2, height/4)
+    console.log('Proximity = ' + round(outputArea * 100) + '%')
 
+    // Draw box on face
     noFill()
     rect(minX, minY, boxWidth, boxHeight);
     
+    // draw nose position
     noStroke();
     fill(0, 255, 255);
-    ellipse(positions[62][0], positions[62][1], 10, 10);
+    outputX = positions[62][0];
+    outputY = positions[62][1];
+
+    ellipse(outputX, outputY, 10, 10);
 
     pop();
-  }
 
+
+
+  }
+}
+
+function branch(blength) {
+  stroke(40, 30, 10);
+  if (blength < 10) {
+    stroke(0, 200, 0);
+  }
+  if (blength < 4) {
+    stroke(random(155, 200), random(50, 140), 0);
+  }
+  strokeWeight(blength / 14);
+  line(0, 0, 0, -blength);
+  translate(0, -blength);
+  if (blength > thisBloom) {
+    push();
+    rotate(thisAngle * 7 / blength);
+    branch(blength * 0.6)
+    pop();
+    push();
+    rotate(-thisAngle * 7 / blength);
+    branch(blength * 0.7);
+    pop();
+  }
 }
