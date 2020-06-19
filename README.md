@@ -1,6 +1,8 @@
 # WhisperingPines
 Webcam Responsive AudioVisual Art
 
+Collaboration with Don Hill: http://appropriate-entertainment.com/
+
 Demo: https://kylemath.github.io/WhisperingPines/
 
 Try in live Editor at: https://editor.p5js.org/kylemath@gmail.com/sketches/KgyWjEMg3
