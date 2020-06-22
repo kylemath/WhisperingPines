@@ -9,6 +9,10 @@ Try in live Editor at: https://editor.p5js.org/kylemath@gmail.com/sketches/KgyWj
 
 ![Example](webcamExample2.png)
 
+# Sound examples
+
+ https://p5js.org/reference/#/p5.Gain
+
 # References
  https://github.com/serghov/heartRate/blob/master/index.js
  
