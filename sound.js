@@ -1,56 +1,35 @@
+/*
+ * @name Load and Play Sound
+ * @description Load sound during preload(). Play a sound when canvas is clicked.
+ * <br><br><em><span class="small"> To run this example locally, you will need the
+ * <a href="http://p5js.org/reference/#/libraries/p5.sound">p5.sound library</a>
+ * a sound file, and a running <a href="https://github.com/processing/p5.js/wiki/Local-server">local server</a>.</span></em>
+ */
 
-// load two soundfile and crossfade beetween them
-var sound1,sound2;
-var gain1, gain2, gain3;
+let ball = {};
+let soundFile;
 
-function preload(){
-  soundFormats('ogg', 'mp3');
-  sound1 = loadSound('../files/Damscray_-_Dancing_Tiger_01');
-  sound2 = loadSound('../files/beat.mp3');
+function preload() {
+  soundFormats('mp3', 'ogg');
+  soundFile = loadSound('assets/beat.mp3');
 }
 
 function setup() {
-  createCanvas(400,200);
-
-  // create a 'master' gain to which we will connect both soundfiles
-  gain3 = new p5.Gain();
-  gain3.connect();
-
-  // setup first sound for playing
-  sound1.rate(1);
-  sound1.loop();
-  sound1.disconnect(); // diconnect from p5 output
-
-  gain1 = new p5.Gain(); // setup a gain node
-  gain1.setInput(sound1); // connect the first sound to its input
-  gain1.connect(gain3); // connect its output to the 'master'
-
-  sound2.rate(1);
-  sound2.disconnect();
-  sound2.loop();
-
-  gain2 = new p5.Gain();
-  gain2.setInput(sound2);
-  gain2.connect(gain3);
-
+  createCanvas(710, 100);
 }
 
-
-function draw(){
-  background(180);
-  
-  // calculate the horizontal distance beetween the mouse and the right of the screen
-  var d = dist(mouseX,0,width,0);
-
-  // map the horizontal position of the mouse to values useable for volume control of sound1
-  var vol1 = map(mouseX,0,width,0,1); 
-  var vol2 = 1-vol1; // when sound1 is loud, sound2 is quiet and vice versa
-
-  gain1.amp(vol1,0.5,0);
-  gain2.amp(vol2,0.5,0);
-
-  // map the vertical position of the mouse to values useable for 'master volume control'
-  var vol3 = map(mouseY,0,height,0,1); 
-  gain3.amp(vol3,0.5,0);
+function draw() {
+  background(0);
+  ball.x = constrain(mouseX, 0, width);
+  ellipse(ball.x, height / 2, 100, 100);
 }
+
+function mousePressed() {
+  // map the ball's x location to a panning degree
+  // between -1.0 (left) and 1.0 (right)
+  let panning = map(ball.x, 0, width, -1.0, 1.0);
+  soundFile.pan(panning);
+  soundFile.play();
+}
+
 
