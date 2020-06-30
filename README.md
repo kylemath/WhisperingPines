@@ -11,7 +11,9 @@ Try in live Editor at: https://editor.p5js.org/kylemath@gmail.com/sketches/KgyWj
 
 # Sound examples
 
- https://p5js.org/reference/#/p5.Gain
+https://p5js.org/reference/#/p5.Gain
+
+https://editor.p5js.org/kylemath@gmail.com/sketches/2ttNC5M6v
 
 # References
  https://github.com/serghov/heartRate/blob/master/index.js
