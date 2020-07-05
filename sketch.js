@@ -5,6 +5,12 @@ let tf="...........................";
 let cnv
 let outputArea = 0;
 let outputSmile = 0;
+let soundFile;
+
+function preload() {
+  soundFormats('mp3', 'ogg');
+  soundFile = loadSound('assets/beat.mp3');
+}
 
 function setup() {
 
@@ -29,6 +35,8 @@ function setup() {
   emotionData = classifier.getBlank();
   
   tf=tf.split('');
+
+
 }
 
 function drawBack() {
@@ -140,10 +148,21 @@ function draw() {
 
     pop();
 
-
-
+    ball = constrain(outputX, 0, width);
+    let panning = map(ball, 0, width, 1.0, -1.0);
+  
+    soundFile.pan(panning);
   }
 }
+
+function mousePressed() {
+  // map the ball's x location to a panning degree
+  // between -1.0 (left) and 1.0 (right)
+
+  soundFile.play();
+
+}
+
 
 function branch(blength) {
   stroke(40, 30, 10);
