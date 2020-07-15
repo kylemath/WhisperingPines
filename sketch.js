@@ -176,6 +176,7 @@ function draw() {
     soundFileBGain.amp(1-voicebalance);
     soundVolume = constrain(outputArea, 0, 1);
     masterGain.amp(soundVolume)
+
   }
 }
 
