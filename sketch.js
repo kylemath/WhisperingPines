@@ -10,8 +10,9 @@ let panning;
 function preload() {
   soundFormats('mp3', 'ogg');
   soundFileA = loadSound('audio/voices_stems/01-pagan burial-consolidated.mp3');
-  soundFileB = loadSound('audio/voices_stems/16-viola moody -consolidated.mp3');
-
+  soundFileB = loadSound('audio/voices_wind_mp3/Viola Moody_mp3_stems/16.1 Viola Moody.mp3');
+  soundFileWind = loadSound('audio/ambient/wind_only.mp3')
+  soundFileVoices = loadSound('audio/ambient/all voices_only.mp3')
 }
 
 function setup() {
@@ -42,19 +43,34 @@ function setup() {
 //   // setup gain
   masterGain = new p5.Gain();
   masterGain.connect();
+
   soundFileA.disconnect(); // diconnect from p5 output
   soundFileAGain = new p5.Gain(); // setup a gain node
   soundFileAGain.setInput(soundFileA); // connect the first sound to its input
   soundFileAGain.connect(masterGain);
+
   soundFileB.disconnect(); // diconnect from p5 output
   soundFileBGain = new p5.Gain(); // setup a gain node
   soundFileBGain.setInput(soundFileB); // connect the first sound to its input
   soundFileBGain.connect(masterGain)
+
+  soundFileWind.disconnect();
+  soundFileWindGain = new p5.Gain();
+  soundFileWindGain.setInput(soundFileWind);
+  soundFileWindGain.connect(masterGain);
+
+  soundFileVoices.disconnect();
+  soundFileVoicesGain = new p5.Gain();
+  soundFileVoicesGain.setInput(soundFileVoices);
+  soundFileVoicesGain.connect(masterGain);
+
 }
 
 function startSound() {
   soundFileA.loop()
   soundFileB.loop()
+  soundFileWind.loop()
+  soundFileVoices.loop()
 }
 
 function drawBack() {
@@ -160,20 +176,26 @@ function draw() {
     ellipse(outputX, outputY, 10, 10);
     pop();
 
+    // get nose position 
     gazeX = constrain(outputX, 0, width);
-    
     voicebalance = map(gazeX, 0, width, 0, 1);
-
-
-
     
-    //adjust sound file based on face location
+    //adjust foreground voices so one on left one on right
     soundFileA.pan(-1.0);
     soundFileB.pan(1.0);
 
-    //adjust sound file based on face proximity
+    //ambient in center
+    soundFileWind.pan(0);
+    soundFileVoices.pan(0);
+
+    //adjust sound amplitude based on gaze location
     soundFileAGain.amp(voicebalance);
     soundFileBGain.amp(1-voicebalance);
+
+    soundFileWindGain.amp(1);
+    soundFileVoicesGain.amp(1);
+
+
     soundVolume = constrain(outputArea, 0, 1);
     masterGain.amp(soundVolume)
 
