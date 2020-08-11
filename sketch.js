@@ -1,32 +1,43 @@
 let positions;
 let videoInput;
-let tf = "...........................";
 let cnv
 let outputArea = 0;
 let outputSmile = 0;
 let soundFile;
 let panning; 
+let scene_num = 0; // index of which screen of the UX flow you are in
+let j = 0;
+let wind_on = false;
+let backvoices_on = false;
+let voices_on = false;
+
 
 function preload() {
   soundFormats('mp3', 'ogg');
-  soundFileA = loadSound('audio/voices_stems/01-pagan burial-consolidated.mp3');
-  soundFileB = loadSound('audio/voices_wind_mp3/Viola Moody_mp3_stems/16.1 Viola Moody.mp3');
-  soundFileWind = loadSound('audio/ambient/wind_only.mp3')
-  soundFileVoices = loadSound('audio/ambient/all voices_only.mp3')
+  soundFileA = loadSound('assets/auditory/voices/01-pagan burial.mp3');
+  soundFileB = loadSound('assets/auditory/viola/16.1 Viola Moody.mp3');
+  soundFileWind = loadSound('assets/auditory/wind_only.mp3')
+  soundFileVoices = loadSound('assets/auditory/all voices_only.mp3')
+  
+  bg_title = loadImage('assets/visual/bg_title.jpg')
+  bg_cam = loadImage('assets/visual/bg_cam.jpg')
+  bg_intro = loadImage('assets/visual/bg_intro.jpg')
+  bg_credits = loadImage('assets/visual/bg_credits.jpg')
+  
+  hotspot1 = loadImage('assets/visual/Page_01.jpg')
+   
 }
 
 function setup() {
 
   // setup camera capture
   videoInput = createCapture(VIDEO);
-  videoInput.size(1000, 800);
-  drawBack();
+  videoInput.size(1000, 563);
   videoInput.position(0, 0);
 
   // setup canvas
-  cnv = createCanvas(1000, 800);
+  cnv = createCanvas(1000, 563);
   cnv.position(0, 0);
-  cnv.mousePressed(startSound);
 
   // setup tracker
   ctracker = new clm.tracker();
@@ -38,9 +49,22 @@ function setup() {
   classifier.init(emotionModel);
   emotionData = classifier.getBlank();
 
-  tf = tf.split('');
+  // setup background gain
+  backgroundGain = new p5.Gain();
+  backgroundGain.connect();
+  backgroundGain.amp(1); 
 
-//   // setup gain
+  soundFileWind.disconnect();
+  soundFileWindGain = new p5.Gain();
+  soundFileWindGain.setInput(soundFileWind);
+  soundFileWindGain.connect(backgroundGain);
+
+  soundFileVoices.disconnect();
+  soundFileVoicesGain = new p5.Gain();
+  soundFileVoicesGain.setInput(soundFileVoices);
+  soundFileVoicesGain.connect(backgroundGain);
+
+  // setup foreground gain
   masterGain = new p5.Gain();
   masterGain.connect();
 
@@ -54,54 +78,78 @@ function setup() {
   soundFileBGain.setInput(soundFileB); // connect the first sound to its input
   soundFileBGain.connect(masterGain)
 
-  soundFileWind.disconnect();
-  soundFileWindGain = new p5.Gain();
-  soundFileWindGain.setInput(soundFileWind);
-  soundFileWindGain.connect(masterGain);
-
-  soundFileVoices.disconnect();
-  soundFileVoicesGain = new p5.Gain();
-  soundFileVoicesGain.setInput(soundFileVoices);
-  soundFileVoicesGain.connect(masterGain);
-
 }
 
-function startSound() {
-  soundFileA.loop()
-  soundFileB.loop()
-  soundFileWind.loop()
-  soundFileVoices.loop()
+function mousePressed() {
+  scene_num++;
 }
-
-function drawBack() {
-  background(55)
-  fill(77, 111, 33);
-  noStroke();
-}
-
-
-let j = 0;
 
 function draw() {
 
   clear();
-  drawBack();
+  switch(scene_num) {
+    case 0:
+      scene0();
+      break;
+    case 1:
+      scene1();
+      break;
+    case 2:
+      scene2();
+      break;
+    case 3:
+      scene3();
+      break;
+    case 4:
+      scene4();
+      break;
+    default:
+      //
+  }
+}
 
+function scene0() {
+  background(bg_title);
+}
+
+function scene1() {
+  background(bg_cam);
+  if (!wind_on) {
+    soundFileWind.loop()
+    soundFileWind.pan(0);
+    soundFileWindGain.amp(1);
+    wind_on = true;
+  }
+}
+
+function scene2() {
+  background(bg_intro);
+  if (!backvoices_on) {
+    soundFileVoices.loop()
+    soundFileVoices.pan(0);
+    soundFileVoicesGain.amp(1);
+    backvoices_on = true;
+  }
+}
+
+function scene3() {
+  //put hotspot background on
+  background(hotspot1);
+
+  //turn on sounds
+  if (!voices_on) {
+    soundFileA.loop()
+    soundFileB.loop()    
+    voices_on = true;
+  }
+
+  // meausure some things about face
   proximity = round(outputArea * 100);
   thisAngle = map(proximity, 0, 100, .5, 10);
   thisHeight = map(proximity, 0, 100, 50, 250);
   thisBloom = map(round(outputSmile * 100), 0, 100, 10, 1);
 
-  push();
-  translate(0, height * 0.9);
-  for (let i = 1; i < 2; i++) {
-    translate(width / 2, 0);
-    push();
-    branch(thisHeight);
-    pop();
-  }
-  pop();
-
+  // flip camera to match head movement
   if (videoInput) {
     translate(videoInput.width, 0);
     scale(-1, 1);
@@ -110,28 +158,22 @@ function draw() {
   positions = ctracker.getCurrentPosition();
   parameters = ctracker.getCurrentParameters();
 
+  // predict emotion
   emotionRecognition = classifier.meanPredict(parameters)
 
+  // once these are working
+  if (positions && emotionRecognition) {
 
-
-  if (positions) {
-
-    push();
-    textSize(18);
-    textAlign(CENTER);
+    // check on smile
     outputSmile = emotionRecognition[5].value;
     console.log('Smile = ' + round(outputSmile * 100) + '%')
-    pop();
 
-    // for face size
+    // calculate face size
     let minX = width;
     let maxX = 0;
     let minY = height;
     let maxY = 0;
-
     for (var i = 0; i < positions.length; i++) {
-
-      // calculate face size
       if (positions[i][0] < minX) {
         minX = positions[i][0];
       }
@@ -144,27 +186,14 @@ function draw() {
       if (positions[i][1] > maxY) {
         maxY = positions[i][1]
       }
-
-      // draw face landmarks
-      stroke(0);
-      fill(0);
-      text(tf[j], positions[i][0], positions[i][1]);
-      j++;
-      if (j >= text.length) {
-        j = 0;
-      }
     }
-
     boxWidth = maxX - minX;
     boxHeight = maxY - minY;
     outputArea = (boxWidth * boxHeight) / (width * height);
-
-    push();
-    textSize(18);
-    textAlign(CENTER);
     console.log('Proximity = ' + round(outputArea * 100) + '%')
 
     // Draw box on face
+    push();
     noFill()
     rect(minX, minY, boxWidth, boxHeight);
 
@@ -176,7 +205,12 @@ function draw() {
     ellipse(outputX, outputY, 10, 10);
     pop();
 
-    // get nose position 
+
+  }
+}
+
+function pan_sounds() {
+    //get nose position 
     gazeX = constrain(outputX, 0, width);
     voicebalance = map(gazeX, 0, width, 0, 1);
     
@@ -184,45 +218,18 @@ function draw() {
     soundFileA.pan(-1.0);
     soundFileB.pan(1.0);
 
-    //ambient in center
-    soundFileWind.pan(0);
-    soundFileVoices.pan(0);
-
-    //adjust sound amplitude based on gaze location
+    //adjust relative sound amplitude based on gaze location
     soundFileAGain.amp(voicebalance);
     soundFileBGain.amp(1-voicebalance);
 
-    soundFileWindGain.amp(1);
-    soundFileVoicesGain.amp(1);
-
-
+    //adjust foreground voices based on proximity
     soundVolume = constrain(outputArea, 0, 1);
     masterGain.amp(soundVolume)
-
-  }
 }
 
+function scene4() {
+  background(bg_credits);
+  soundFileVoices.stop()
+  soundFileVoices.stop()
 
-// recursive branching function for drawing tree
-function branch(blength) {
-  stroke(40, 30, 10);
-  if (blength < 10) {
-    stroke(0, 200, 0);
-  }
-  if (blength < 4) {
-    stroke(random(155, 200), random(50, 140), 0);
-  }
-  strokeWeight(blength / 14);
-  line(0, 0, 0, -blength);
-  translate(0, -blength);
-  if (blength > thisBloom) {
-    push();
-    rotate(thisAngle * 7 / blength);
-    branch(blength * 0.6)
-    pop();
-    push();
-    rotate(-thisAngle * 7 / blength);
-    branch(blength * 0.7);
-    pop();
-  }
 }
