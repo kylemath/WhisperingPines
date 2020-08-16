@@ -43,11 +43,11 @@ function setup() {
 
   // setup camera capture
   videoInput = createCapture(VIDEO);
-  videoInput.size(1000, 563);
+  videoInput.size(displayWidth, displayHeight);
   videoInput.position(0, 0);
 
   // setup canvas
-  cnv = createCanvas(1000, 563);
+  cnv = createCanvas(1000, 528);
   cnv.position(0, 0);
 
   // setup tracker
@@ -137,6 +137,11 @@ function setup() {
 }
 
 function mousePressed() {
+  if (scene_num == 0) {
+    let fs = fullscreen();
+    fullscreen(!fs);
+    resizeCanvas(displayWidth, displayHeight)
+  }
   scene_num++;
 }
 
