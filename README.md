@@ -5,7 +5,7 @@ Collaboration with Don Hill: http://appropriate-entertainment.com/
 
 Demo: https://kylemath.github.io/WhisperingPines/
 
-Try in live Editor at: https://editor.p5js.org/kylemath@gmail.com/sketches/KgyWjEMg3
+Try in live Editor at: https://editor.p5js.org/kylemath@gmail.com/sketches/XG8mgwaMc
 
 ![Example](webcamExample2.png)
 
