@@ -14,8 +14,18 @@ let voices_on = false;
 
 function preload() {
   soundFormats('mp3', 'ogg');
-  soundFileA = loadSound('assets/auditory/voices/01-pagan burial.mp3');
-  soundFileB = loadSound('assets/auditory/viola/16.1 Viola Moody.mp3');
+  soundFileA1 = loadSound('assets/auditory/voices/07-Don Parrot_red lake.mp3');
+  soundFileA2 = loadSound('assets/auditory/voices/02-wendigo.mp3');
+  soundFileA3 = loadSound('assets/auditory/voices/03-Art Lees.mp3');
+  soundFileA4 = loadSound('assets/auditory/voices/10-ghost story_rosseau.mp3');
+
+
+  soundFileB1 = loadSound('assets/auditory/viola/16.1 Viola Moody.mp3');
+  soundFileB2 = loadSound('assets/auditory/viola/16.2 Viola Moody.mp3');
+  soundFileB3 = loadSound('assets/auditory/viola/16.3 Viola Moody.mp3');
+  soundFileB4 = loadSound('assets/auditory/viola/16.4 Viola Moody.mp3');
+
+
   soundFileWind = loadSound('assets/auditory/wind_only.mp3')
   soundFileVoices = loadSound('assets/auditory/all voices_only.mp3')
   
@@ -25,6 +35,7 @@ function preload() {
   bg_credits = loadImage('assets/visual/bg_credits.jpg')
   
   hotspot1 = loadImage('assets/visual/Page_01.jpg')
+  nose_spot = loadImage('assets/visual/nose_button.png')
    
 }
 
@@ -52,7 +63,7 @@ function setup() {
   // setup background gain
   backgroundGain = new p5.Gain();
   backgroundGain.connect();
-  backgroundGain.amp(1); 
+  backgroundGain.amp(.1); 
 
   soundFileWind.disconnect();
   soundFileWindGain = new p5.Gain();
@@ -68,16 +79,61 @@ function setup() {
   masterGain = new p5.Gain();
   masterGain.connect();
 
-  soundFileA.disconnect(); // diconnect from p5 output
-  soundFileAGain = new p5.Gain(); // setup a gain node
-  soundFileAGain.setInput(soundFileA); // connect the first sound to its input
-  soundFileAGain.connect(masterGain);
+  soundFileA1.disconnect(); // diconnect from p5 output
+  soundFileA1Gain = new p5.Gain(); // setup a gain node
+  soundFileA1Gain.setInput(soundFileA1); // connect the first sound to its input
+  soundFileA1Gain.connect(masterGain);
 
-  soundFileB.disconnect(); // diconnect from p5 output
-  soundFileBGain = new p5.Gain(); // setup a gain node
-  soundFileBGain.setInput(soundFileB); // connect the first sound to its input
-  soundFileBGain.connect(masterGain)
+  soundFileB1.disconnect(); // diconnect from p5 output
+  soundFileB1Gain = new p5.Gain(); // setup a gain node
+  soundFileB1Gain.setInput(soundFileB1); // connect the first sound to its input
+  soundFileB1Gain.connect(masterGain)
+    
+  //adjust foreground voices so one on left one on right
+  soundFileA1.pan(-1.0);
+  soundFileB1.pan(1.0);
 
+  soundFileA2.disconnect(); // diconnect from p5 output
+  soundFileA2Gain = new p5.Gain(); // setup a gain node
+  soundFileA2Gain.setInput(soundFileA2); // connect the first sound to its input
+  soundFileA2Gain.connect(masterGain);
+
+  soundFileB2.disconnect(); // diconnect from p5 output
+  soundFileB2Gain = new p5.Gain(); // setup a gain node
+  soundFileB2Gain.setInput(soundFileB2); // connect the first sound to its input
+  soundFileB2Gain.connect(masterGain)
+
+  //adjust foreground voices so one on left one on right
+  soundFileA2.pan(-1.0);
+  soundFileB2.pan(1.0);
+
+  soundFileA3.disconnect(); // diconnect from p5 output
+  soundFileA3Gain = new p5.Gain(); // setup a gain node
+  soundFileA3Gain.setInput(soundFileA3); // connect the first sound to its input
+  soundFileA3Gain.connect(masterGain);
+
+  soundFileB3.disconnect(); // diconnect from p5 output
+  soundFileB3Gain = new p5.Gain(); // setup a gain node
+  soundFileB3Gain.setInput(soundFileB3); // connect the first sound to its input
+  soundFileB3Gain.connect(masterGain)
+
+  //adjust foreground voices so one on left one on right
+  soundFileA3.pan(-1.0);
+  soundFileB3.pan(1.0);
+
+  soundFileA4.disconnect(); // diconnect from p5 output
+  soundFileA4Gain = new p5.Gain(); // setup a gain node
+  soundFileA4Gain.setInput(soundFileA4); // connect the first sound to its input
+  soundFileA4Gain.connect(masterGain);
+
+  soundFileB4.disconnect(); // diconnect from p5 output
+  soundFileB4Gain = new p5.Gain(); // setup a gain node
+  soundFileB4Gain.setInput(soundFileB4); // connect the first sound to its input
+  soundFileB4Gain.connect(masterGain)      
+
+  //adjust foreground voices so one on left one on right
+  soundFileA4.pan(-1.0);
+  soundFileB4.pan(1.0);
 }
 
 function mousePressed() {
@@ -103,6 +159,9 @@ function draw() {
     case 4:
       scene4();
       break;
+    case 5:
+      scene5();
+      break;
     default:
       //
   }
@@ -117,7 +176,7 @@ function scene1() {
   if (!wind_on) {
     soundFileWind.loop()
     soundFileWind.pan(0);
-    soundFileWindGain.amp(1);
+    soundFileWindGain.amp(.1);
     wind_on = true;
   }
 }
@@ -127,7 +186,7 @@ function scene2() {
   if (!backvoices_on) {
     soundFileVoices.loop()
     soundFileVoices.pan(0);
-    soundFileVoicesGain.amp(1);
+    soundFileVoicesGain.amp(.1);
     backvoices_on = true;
   }
 }
@@ -135,19 +194,6 @@ function scene2() {
 function scene3() {
   //put hotspot background on
   background(hotspot1);
-
-  //turn on sounds
-  if (!voices_on) {
-    soundFileA.loop()
-    soundFileB.loop()    
-    voices_on = true;
-  }
-
-  // meausure some things about face
-  proximity = round(outputArea * 100);
-  thisAngle = map(proximity, 0, 100, .5, 10);
-  thisHeight = map(proximity, 0, 100, 50, 250);
-  thisBloom = map(round(outputSmile * 100), 0, 100, 10, 1);
 
   // flip camera to match head movement
   if (videoInput) {
@@ -190,6 +236,7 @@ function scene3() {
     boxWidth = maxX - minX;
     boxHeight = maxY - minY;
     outputArea = (boxWidth * boxHeight) / (width * height);
+    proximity = round(outputArea * 100);
     console.log('Proximity = ' + round(outputArea * 100) + '%')
 
     // Draw box on face
@@ -202,26 +249,83 @@ function scene3() {
     fill(0, 255, 255);
     outputX = positions[62][0];
     outputY = positions[62][1];
-    ellipse(outputX, outputY, 10, 10);
+    image(nose_spot, outputX, outputY, 25, 25)
     pop();
 
+    //turn on sounds
+    pan_sounds();
 
   }
 }
 
 function pan_sounds() {
+    
+    //select sound and start
+    if (!voices_on) {
+      soundFileA1Gain.amp(0);
+      soundFileB1Gain.amp(0);
+      soundFileA2Gain.amp(0);
+      soundFileB2Gain.amp(0);
+      soundFileA3Gain.amp(0);
+      soundFileB3Gain.amp(0);
+      soundFileA4Gain.amp(0);
+      soundFileB4Gain.amp(0);      
+      soundFileA1.loop()
+      soundFileB1.loop()
+      soundFileA2.loop()
+      soundFileB2.loop() 
+      soundFileA3.loop()
+      soundFileB3.loop() 
+      soundFileA4.loop()
+      soundFileB4.loop()     
+      voices_on = true;
+    }
+
     //get nose position 
     gazeX = constrain(outputX, 0, width);
     voicebalance = map(gazeX, 0, width, 0, 1);
     
-    //adjust foreground voices so one on left one on right
-    soundFileA.pan(-1.0);
-    soundFileB.pan(1.0);
-
     //adjust relative sound amplitude based on gaze location
-    soundFileAGain.amp(voicebalance);
-    soundFileBGain.amp(1-voicebalance);
 
+    if (voicebalance < .25) {
+      soundFileA1Gain.amp(1);
+      soundFileB1Gain.amp(1);
+      soundFileA2Gain.amp(0);
+      soundFileB2Gain.amp(0);
+      soundFileA3Gain.amp(0);
+      soundFileB3Gain.amp(0);
+      soundFileA4Gain.amp(0);
+      soundFileB4Gain.amp(0);
+    } else if (voicebalance >= .25 && voicebalance < .50) {
+      soundFileA1Gain.amp(0);
+      soundFileB1Gain.amp(0);
+      soundFileA2Gain.amp(1);
+      soundFileB2Gain.amp(1);
+      soundFileA3Gain.amp(0);
+      soundFileB3Gain.amp(0);
+      soundFileA4Gain.amp(0);
+      soundFileB4Gain.amp(0);
+    } else if (voicebalance >= .50 && voicebalance < .75) {
+      soundFileA1Gain.amp(0);
+      soundFileB1Gain.amp(0);
+      soundFileA2Gain.amp(0);
+      soundFileB2Gain.amp(0);
+      soundFileA3Gain.amp(1);
+      soundFileB3Gain.amp(1);
+      soundFileA4Gain.amp(0);
+      soundFileB4Gain.amp(0);    
+    } else {
+      soundFileA1Gain.amp(0);
+      soundFileB1Gain.amp(0);
+      soundFileA2Gain.amp(0);
+      soundFileB2Gain.amp(0);
+      soundFileA3Gain.amp(0);
+      soundFileB3Gain.amp(0);
+      soundFileA4Gain.amp(1);
+      soundFileB4Gain.amp(1);      
+    }
+
+   
     //adjust foreground voices based on proximity
     soundVolume = constrain(outputArea, 0, 1);
     masterGain.amp(soundVolume)
@@ -230,6 +334,16 @@ function pan_sounds() {
 function scene4() {
   background(bg_credits);
   soundFileVoices.stop()
-  soundFileVoices.stop()
+  soundFileA1.stop()
+  soundFileB1.stop()
+  soundFileA2.stop()
+  soundFileB2.stop()
+  soundFileA3.stop()
+  soundFileB3.stop()
+  soundFileA4.stop()
+  soundFileB4.stop()
+}
 
+function scene5() {
+  soundFileWind.stop()
 }
