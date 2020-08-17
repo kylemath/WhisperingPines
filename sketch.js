@@ -389,6 +389,13 @@ function scene3() {
 
     // check on smile
     outputSmile = emotionRecognition[5].value;
+    console.log(emotionRecognition);
+    // 0: {emotion: "angry", value: 0.05873836091453903}
+    // 1: {emotion: "disgusted", value: 0.006970389350505129}
+    // 2: {emotion: "fear", value: 0.007838597025081209}
+    // 3: {emotion: "sad", value: 0.3644606514967711}
+    // 4: {emotion: "surprised", value: 0.006303609805024607}
+    // 5: {emotion: "happy", value: 0.02721371664183402}
     console.log('Smile = ' + round(outputSmile * 100) + '%')
 
     // calculate face size
