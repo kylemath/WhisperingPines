@@ -69,7 +69,9 @@ function preload() {
   // hotspot12 = loadImage('assets/visual/Page_12.jpg')
 
   nose_spot = loadImage('assets/visual/nose_button.png')
-   
+  nose_spot_red = loadImage('assets/visual/nose_button_red.png')
+  nose_spot_green = loadImage('assets/visual/nose_button_green.png')
+
 }
 
 function setup() {
@@ -433,7 +435,13 @@ function scene3() {
     fill(0, 255, 255);
     outputX = positions[62][0];
     outputY = positions[62][1];
-    image(nose_spot, outputX, outputY, 25, 25)
+    if (outputSmile > .9) {
+      image(nose_spot_green, outputX, outputY, 25, 25)
+    } else if (outputSmile < .1 && outputSmile != 0.0) {
+      image(nose_spot_red, outputX, outputY, 25, 25)
+    } else {
+      image(nose_spot, outputX, outputY, 25, 25)
+    }
     pop();
 
     switch(scene_num) {
