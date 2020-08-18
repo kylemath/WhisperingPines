@@ -38,7 +38,7 @@ function preload() {
 
   soundFileE1 = loadSound('assets/auditory/voices/13-chopped down all the trees.mp3');
   soundFileE2 = loadSound('assets/auditory/voices/08-i couldnt buy a job.mp3');
-  soundFileE3 = loadSound('assets/auditory/voices/09-nanabush_sleeping giant.mp3');
+  soundFileE3 = loadSound('assets/auditory/voices/05.1 Tom Thomson_story.mp3');
   soundFileE4 = loadSound('assets/auditory/voices/15-no women in camps HISS.mp3');
 
   soundFileF1 = loadSound('assets/auditory/viola/16.9 Viola Moody.mp3');
@@ -114,6 +114,9 @@ function setup() {
   masterGain = new p5.Gain();
   masterGain.connect();
 
+  ///
+  /// AB
+
   soundFileA1.disconnect(); // diconnect from p5 output
   soundFileA1Gain = new p5.Gain(); // setup a gain node
   soundFileA1Gain.setInput(soundFileA1); // connect the first sound to its input
@@ -125,8 +128,8 @@ function setup() {
   soundFileB1Gain.connect(masterGain)
     
   //adjust foreground voices so one on left one on right
-  soundFileA1.pan(-1.0);
-  soundFileB1.pan(1.0);
+  soundFileA1.pan(1.0);
+  soundFileB1.pan(0.0);
 
   soundFileA2.disconnect(); // diconnect from p5 output
   soundFileA2Gain = new p5.Gain(); // setup a gain node
@@ -139,8 +142,8 @@ function setup() {
   soundFileB2Gain.connect(masterGain)
 
   //adjust foreground voices so one on left one on right
-  soundFileA2.pan(-0.5);
-  soundFileB2.pan(0.5);
+  soundFileA2.pan(0.5);
+  soundFileB2.pan(0.0);
 
   soundFileA3.disconnect(); // diconnect from p5 output
   soundFileA3Gain = new p5.Gain(); // setup a gain node
@@ -154,7 +157,7 @@ function setup() {
 
   //adjust foreground voices so one on left one on right
   soundFileA3.pan(-0.5);
-  soundFileB3.pan(0.5);
+  soundFileB3.pan(0.0);
 
   soundFileA4.disconnect(); // diconnect from p5 output
   soundFileA4Gain = new p5.Gain(); // setup a gain node
@@ -168,7 +171,7 @@ function setup() {
 
   //adjust foreground voices so one on left one on right
   soundFileA4.pan(-1.0);
-  soundFileB4.pan(1.0);
+  soundFileB4.pan(0.0);
 
   ///
   /// CD
@@ -184,8 +187,8 @@ function setup() {
   soundFileD1Gain.connect(masterGain)
     
   //adjust foreground voices so one on left one on right
-  soundFileC1.pan(-1.0);
-  soundFileD1.pan(1.0);
+  soundFileC1.pan(1.0);
+  soundFileD1.pan(0.0);
 
   soundFileC2.disconnect(); // diconnect from p5 output
   soundFileC2Gain = new p5.Gain(); // setup a gain node
@@ -198,8 +201,8 @@ function setup() {
   soundFileD2Gain.connect(masterGain)
 
   //adjust foreground voices so one on left one on right
-  soundFileC2.pan(-0.5);
-  soundFileD2.pan(0.5);
+  soundFileC2.pan(0.5);
+  soundFileD2.pan(0.0);
 
   soundFileC3.disconnect(); // diconnect from p5 output
   soundFileC3Gain = new p5.Gain(); // setup a gain node
@@ -213,7 +216,7 @@ function setup() {
 
   //adjust foreground voices so one on left one on right
   soundFileC3.pan(-0.5);
-  soundFileD3.pan(0.5);
+  soundFileD3.pan(0.0);
 
   soundFileC4.disconnect(); // diconnect from p5 output
   soundFileC4Gain = new p5.Gain(); // setup a gain node
@@ -227,7 +230,7 @@ function setup() {
 
   //adjust foreground voices so one on left one on right
   soundFileC4.pan(-1.0);
-  soundFileD4.pan(1.0);
+  soundFileD4.pan(0.0);
 
   ///
   /// EF
@@ -243,8 +246,8 @@ function setup() {
   soundFileF1Gain.connect(masterGain)
     
   //adjust foreground voices so one on left one on right
-  soundFileE1.pan(-1.0);
-  soundFileF1.pan(1.0);
+  soundFileE1.pan(1.0);
+  soundFileF1.pan(0.0);
 
   soundFileE2.disconnect(); // diconnect from p5 output
   soundFileE2Gain = new p5.Gain(); // setup a gain node
@@ -257,8 +260,8 @@ function setup() {
   soundFileF2Gain.connect(masterGain)
 
   //adjust foreground voices so one on left one on right
-  soundFileE2.pan(-0.5);
-  soundFileF2.pan(0.5);
+  soundFileE2.pan(0.5);
+  soundFileF2.pan(0.0);
 
   soundFileE3.disconnect(); // diconnect from p5 output
   soundFileE3Gain = new p5.Gain(); // setup a gain node
@@ -272,7 +275,7 @@ function setup() {
 
   //adjust foreground voices so one on left one on right
   soundFileE3.pan(-0.5);
-  soundFileF3.pan(0.5);
+  soundFileF3.pan(0.0);
 
   soundFileE4.disconnect(); // diconnect from p5 output
   soundFileE4Gain = new p5.Gain(); // setup a gain node
@@ -286,7 +289,7 @@ function setup() {
 
   //adjust foreground voices so one on left one on right
   soundFileE4.pan(-1.0);
-  soundFileF4.pan(1.0);
+  soundFileF4.pan(0.0);
 }
 
 function mousePressed() {
