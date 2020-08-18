@@ -495,7 +495,7 @@ function pan_sounds3() {
 
     if (voicebalance < .25) {
       soundFileA1Gain.amp(1);
-      soundFileB1Gain.amp(1);
+      soundFileB1Gain.amp(1-outputSmile);
       soundFileA2Gain.amp(0);
       soundFileB2Gain.amp(0);
       soundFileA3Gain.amp(0);
@@ -506,7 +506,7 @@ function pan_sounds3() {
       soundFileA1Gain.amp(0);
       soundFileB1Gain.amp(0);
       soundFileA2Gain.amp(1);
-      soundFileB2Gain.amp(1);
+      soundFileB2Gain.amp(1-outputSmile);
       soundFileA3Gain.amp(0);
       soundFileB3Gain.amp(0);
       soundFileA4Gain.amp(0);
@@ -517,7 +517,7 @@ function pan_sounds3() {
       soundFileA2Gain.amp(0);
       soundFileB2Gain.amp(0);
       soundFileA3Gain.amp(1);
-      soundFileB3Gain.amp(1);
+      soundFileB3Gain.amp(1-outputSmile);
       soundFileA4Gain.amp(0);
       soundFileB4Gain.amp(0);    
     } else {
@@ -528,7 +528,7 @@ function pan_sounds3() {
       soundFileA3Gain.amp(0);
       soundFileB3Gain.amp(0);
       soundFileA4Gain.amp(1);
-      soundFileB4Gain.amp(1);      
+      soundFileB4Gain.amp(1-outputSmile);      
     }
 
    
@@ -579,7 +579,7 @@ function pan_sounds4() {
 
     if (voicebalance < .25) {
       soundFileC1Gain.amp(1);
-      soundFileD1Gain.amp(1);
+      soundFileD1Gain.amp(1-outputSmile);
       soundFileC2Gain.amp(0);
       soundFileD2Gain.amp(0);
       soundFileC3Gain.amp(0);
@@ -590,7 +590,7 @@ function pan_sounds4() {
       soundFileC1Gain.amp(0);
       soundFileD1Gain.amp(0);
       soundFileC2Gain.amp(1);
-      soundFileD2Gain.amp(1);
+      soundFileD2Gain.amp(1-outputSmile);
       soundFileC3Gain.amp(0);
       soundFileD3Gain.amp(0);
       soundFileC4Gain.amp(0);
@@ -601,7 +601,7 @@ function pan_sounds4() {
       soundFileC2Gain.amp(0);
       soundFileD2Gain.amp(0);
       soundFileC3Gain.amp(1);
-      soundFileD3Gain.amp(1);
+      soundFileD3Gain.amp(1-outputSmile);
       soundFileC4Gain.amp(0);
       soundFileD4Gain.amp(0);    
     } else {
@@ -612,7 +612,7 @@ function pan_sounds4() {
       soundFileC3Gain.amp(0);
       soundFileD3Gain.amp(0);
       soundFileC4Gain.amp(1);
-      soundFileD4Gain.amp(1);      
+      soundFileD4Gain.amp(1-outputSmile);      
     }
 
    
@@ -663,7 +663,7 @@ function pan_sounds5() {
 
     if (voicebalance < .25) {
       soundFileE1Gain.amp(1);
-      soundFileF1Gain.amp(1);
+      soundFileF1Gain.amp(1-outputSmile);
       soundFileE2Gain.amp(0);
       soundFileF2Gain.amp(0);
       soundFileE3Gain.amp(0);
@@ -674,7 +674,7 @@ function pan_sounds5() {
       soundFileE1Gain.amp(0);
       soundFileF1Gain.amp(0);
       soundFileE2Gain.amp(1);
-      soundFileF2Gain.amp(1);
+      soundFileF2Gain.amp(1-outputSmile);
       soundFileE3Gain.amp(0);
       soundFileF3Gain.amp(0);
       soundFileE4Gain.amp(0);
@@ -685,7 +685,7 @@ function pan_sounds5() {
       soundFileE2Gain.amp(0);
       soundFileF2Gain.amp(0);
       soundFileE3Gain.amp(1);
-      soundFileF3Gain.amp(1);
+      soundFileF3Gain.amp(1-outputSmile);
       soundFileE4Gain.amp(0);
       soundFileF4Gain.amp(0);    
     } else {
@@ -696,7 +696,7 @@ function pan_sounds5() {
       soundFileE3Gain.amp(0);
       soundFileF3Gain.amp(0);
       soundFileE4Gain.amp(1);
-      soundFileF4Gain.amp(1);      
+      soundFileF4Gain.amp(1-outputSmile);      
     }
 
    
