@@ -348,6 +348,8 @@ function scene1() {
     soundFileWindGain.amp(.5);
     wind_on = true;
   }
+  drawStatic();
+
 }
 
 function scene2() {
@@ -358,7 +360,20 @@ function scene2() {
     soundFileVoicesGain.amp(.5);
     backvoices_on = true;
   }
+  drawStatic();
+
 }
+
+function drawStatic() {
+  for (var ispot = 0; ispot < 2500; ispot++) { 
+    squareColor = color(random(0,255))
+    squareColor.setAlpha(35);  
+    fill(squareColor);
+    strokeWeight(0);
+    rect(random(0,width), random(0,height), 10, 10);
+  }
+}
+
 
 function scene3() {
   //put hotspot background on
@@ -376,6 +391,8 @@ function scene3() {
     default:
       //
   }
+
+  drawStatic();
 
   // flip camera to match head movement
   if (videoInput) {
@@ -431,6 +448,7 @@ function scene3() {
     // Draw box on face
     push();
     noFill()
+    strokeWeight(1);
     rect(minX, minY, boxWidth, boxHeight);
 
     // draw nose position
@@ -543,14 +561,14 @@ function pan_sounds4() {
 
     //select sound and start
     if (!voices_on) {
-      soundFileA1.stop()
-      soundFileB1.stop()
-      soundFileA2.stop()
-      soundFileB2.stop()
-      soundFileA3.stop()
-      soundFileB3.stop()
-      soundFileA4.stop()
-      soundFileB4.stop()
+      soundFileA1.fade(0,1)
+      soundFileB1.fade(0,1)
+      soundFileA2.fade(0,1)
+      soundFileB2.fade(0,1)
+      soundFileA3.fade(0,1)
+      soundFileB3.fade(0,1)
+      soundFileA4.fade(0,1)
+      soundFileB4.fade(0,1)
 
       soundFileC1Gain.amp(0);
       soundFileD1Gain.amp(0);
@@ -627,14 +645,14 @@ function pan_sounds5() {
 
     //select sound and start
     if (!voices_on) {
-      soundFileC1.stop()
-      soundFileD1.stop()
-      soundFileC2.stop()
-      soundFileD2.stop()
-      soundFileC3.stop()
-      soundFileD3.stop()
-      soundFileC4.stop()
-      soundFileD4.stop()
+      soundFileC1.fade(0,1)
+      soundFileD1.fade(0,1)
+      soundFileC2.fade(0,1)
+      soundFileD2.fade(0,1)
+      soundFileC3.fade(0,1)
+      soundFileD3.fade(0,1)
+      soundFileC4.fade(0,1)
+      soundFileD4.fade(0,1)
 
       soundFileE1Gain.amp(0);
       soundFileF1Gain.amp(0);
@@ -707,18 +725,20 @@ function pan_sounds5() {
 
 function scene6() {
   background(bg_credits);
-  soundFileE1.stop()
-  soundFileF1.stop()
-  soundFileE2.stop()
-  soundFileF2.stop()
-  soundFileE3.stop()
-  soundFileF3.stop()
-  soundFileE4.stop()
-  soundFileF4.stop()
+  soundFileE1.fade(0,1)
+  soundFileF1.fade(0,1)
+  soundFileE2.fade(0,1)
+  soundFileF2.fade(0,1)
+  soundFileE3.fade(0,1)
+  soundFileF3.fade(0,1)
+  soundFileE4.fade(0,1)
+  soundFileF4.fade(0,1)
+  drawStatic();
+
 }
 
 function scene7() {
-  soundFileWind.stop()
-  soundFileVoices.stop()
+  soundFileWind.fade(0,1)
+  soundFileVoices.fade(0,1)
 
 }
