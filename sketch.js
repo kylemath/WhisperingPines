@@ -10,63 +10,94 @@ let j = 0;
 let wind_on = false;
 let backvoices_on = false;
 let voices_on = false;
-
+let first_time = 1; // to only maximize on first time
 
 function preload() {
   soundFormats('mp3', 'ogg');
-  soundFileA1 = loadSound('assets/auditory/voices/07-Don Parrot_red lake.mp3');
-  soundFileA2 = loadSound('assets/auditory/voices/02-wendigo.mp3');
-  soundFileA3 = loadSound('assets/auditory/voices/03-Art Lees.mp3');
-  soundFileA4 = loadSound('assets/auditory/voices/10-ghost story_rosseau.mp3');
+  
+  // Page 4
+  soundFileA1 = loadSound('assets/auditory/voices/11.mp3');
+  soundFileA2 = loadSound('assets/auditory/voices/04.mp3');
+  soundFileA3 = loadSound('assets/auditory/voices/03.mp3');
+  soundFileA4 = loadSound('assets/auditory/voices/07.mp3');
 
-  soundFileB1 = loadSound('assets/auditory/viola/16.1 Viola Moody.mp3');
-  soundFileB2 = loadSound('assets/auditory/viola/16.2 Viola Moody.mp3');
-  soundFileB3 = loadSound('assets/auditory/viola/16.3 Viola Moody.mp3');
-  soundFileB4 = loadSound('assets/auditory/viola/16.4 Viola Moody.mp3');
+  soundFileB1 = loadSound('assets/auditory/viola/VIola_1.mp3');
+  soundFileB2 = loadSound('assets/auditory/viola/VIola_2.mp3');
+  soundFileB3 = loadSound('assets/auditory/viola/VIola_3.mp3');
+  soundFileB4 = loadSound('assets/auditory/viola/VIola_4.mp3');
 
+  // Page 5
+  soundFileC1 = loadSound('assets/auditory/voices/23.mp3');
+  soundFileC2 = loadSound('assets/auditory/voices/09.mp3');
+  soundFileC3 = loadSound('assets/auditory/voices/02.mp3');
+  soundFileC4 = loadSound('assets/auditory/voices/01.mp3');
 
-  soundFileC1 = loadSound('assets/auditory/voices/01-pagan burial.mp3');
-  soundFileC2 = loadSound('assets/auditory/voices/06-water witching_story.mp3');
-  soundFileC3 = loadSound('assets/auditory/voices/09-nanabush_sleeping giant.mp3');
-  soundFileC4 = loadSound('assets/auditory/voices/12-frog, frog, frog.mp3');
+  soundFileD1 = loadSound('assets/auditory/viola/VIola_5.mp3');
+  soundFileD2 = loadSound('assets/auditory/viola/VIola_6.mp3');
+  soundFileD3 = loadSound('assets/auditory/viola/VIola_7.mp3');
+  soundFileD4 = loadSound('assets/auditory/viola/VIola_8.mp3');
 
-  soundFileD1 = loadSound('assets/auditory/viola/16.5 Viola Moody.mp3');
-  soundFileD2 = loadSound('assets/auditory/viola/16.6 Viola Moody.mp3');
-  soundFileD3 = loadSound('assets/auditory/viola/16.7 Viola Moody.mp3');
-  soundFileD4 = loadSound('assets/auditory/viola/16.8 Viola Moody.mp3');
+  // Page 6
+  soundFileE1 = loadSound('assets/auditory/voices/23.mp3');
+  soundFileE2 = loadSound('assets/auditory/voices/16.mp3');
+  soundFileE3 = loadSound('assets/auditory/voices/08.mp3');
+  soundFileE4 = loadSound('assets/auditory/voices/12.mp3');
 
+  soundFileF1 = loadSound('assets/auditory/viola/VIola_9.mp3');
+  soundFileF2 = loadSound('assets/auditory/viola/VIola_10.mp3');
+  soundFileF3 = loadSound('assets/auditory/viola/VIola_11.mp3');
+  soundFileF4 = loadSound('assets/auditory/viola/VIola_12.mp3');
 
-  soundFileE1 = loadSound('assets/auditory/voices/13-chopped down all the trees.mp3');
-  soundFileE2 = loadSound('assets/auditory/voices/08-i couldnt buy a job.mp3');
-  soundFileE3 = loadSound('assets/auditory/voices/05.1 Tom Thomson_story.mp3');
-  soundFileE4 = loadSound('assets/auditory/voices/15-no women in camps HISS.mp3');
+  // Page 7
+  soundFileG1 = loadSound('assets/auditory/voices/05.mp3');
+  soundFileG2 = loadSound('assets/auditory/voices/14.mp3');
+  soundFileG3 = loadSound('assets/auditory/voices/10.mp3');
+  soundFileG4 = loadSound('assets/auditory/voices/22.mp3');
 
-  soundFileF1 = loadSound('assets/auditory/viola/16.9 Viola Moody.mp3');
-  soundFileF2 = loadSound('assets/auditory/viola/16.10 Viola Moody.mp3');
-  soundFileF3 = loadSound('assets/auditory/viola/16.11 Viola Moody.mp3');
-  soundFileF4 = loadSound('assets/auditory/viola/16.12 Viola Moody.mp3');
+  soundFileH1 = loadSound('assets/auditory/viola/VIola_13.mp3');
+  soundFileH2 = loadSound('assets/auditory/viola/VIola_14.mp3');
+  soundFileH3 = loadSound('assets/auditory/viola/VIola_15.mp3');
+  soundFileH4 = loadSound('assets/auditory/viola/VIola_16.mp3');
+
+  // Page 8
+  soundFileI1 = loadSound('assets/auditory/voices/06.mp3');
+  soundFileI2 = loadSound('assets/auditory/voices/17.mp3');
+  soundFileI3 = loadSound('assets/auditory/voices/20.mp3');
+  soundFileI4 = loadSound('assets/auditory/voices/21.mp3');
+
+  soundFileJ1 = loadSound('assets/auditory/viola/VIola_17.mp3');
+  soundFileJ2 = loadSound('assets/auditory/viola/VIola_18.mp3');
+  soundFileJ3 = loadSound('assets/auditory/viola/VIola_19.mp3');
+  soundFileJ4 = loadSound('assets/auditory/viola/VIola_20.mp3');
+
+  // Page 9
+  soundFileK1 = loadSound('assets/auditory/voices/15.mp3');
+  soundFileK2 = loadSound('assets/auditory/voices/18.mp3');
+  soundFileK3 = loadSound('assets/auditory/voices/24.mp3');
+  soundFileK4 = loadSound('assets/auditory/voices/19.mp3');
+
+  soundFileL1 = loadSound('assets/auditory/viola/VIola_21.mp3');
+  soundFileL2 = loadSound('assets/auditory/viola/VIola_22.mp3');
+  soundFileL3 = loadSound('assets/auditory/viola/VIola_23.mp3');
+  soundFileL4 = loadSound('assets/auditory/viola/VIola_24.mp3');
 
 
   soundFileWind = loadSound('assets/auditory/wind_only.mp3')
   soundFileVoices = loadSound('assets/auditory/all voices_only.mp3')
   
-  bg_title = loadImage('assets/visual/bg_title.jpg')
-  bg_cam = loadImage('assets/visual/bg_cam.jpg')
-  bg_intro = loadImage('assets/visual/bg_intro.jpg')
-  bg_credits = loadImage('assets/visual/bg_credits.jpg')
-  
-  hotspot1 = loadImage('assets/visual/Page_01.jpg')
-  hotspot2 = loadImage('assets/visual/Page_02.jpg')
-  hotspot3 = loadImage('assets/visual/Page_03.jpg')
-  // hotspot4 = loadImage('assets/visual/Page_04.jpg')
-  // hotspot5 = loadImage('assets/visual/Page_05.jpg')
-  // hotspot6 = loadImage('assets/visual/Page_06.jpg')
-  // hotspot7 = loadImage('assets/visual/Page_07.jpg')
-  // hotspot8 = loadImage('assets/visual/Page_08.jpg')
-  // hotspot9 = loadImage('assets/visual/Page_09.jpg')
-  // hotspot10 = loadImage('assets/visual/Page_10.jpg')
-  // hotspot11 = loadImage('assets/visual/Page_11.jpg')
-  // hotspot12 = loadImage('assets/visual/Page_12.jpg')
+  bg_title = loadImage('assets/visual/Page_01.jpg')
+  bg_cam = loadImage('assets/visual/Page_02.jpg')
+  bg_intro = loadImage('assets/visual/Page_03.jpg')
+  bg_credits = loadImage('assets/visual/Page_10.jpg')
+  bg_credits2 = loadImage('assets/visual/Page_11.jpg')
+  bg_outro = loadImage('assets/visual/Page_12.jpg')
+
+  hotspot1 = loadImage('assets/visual/Page_04.jpg')
+  hotspot2 = loadImage('assets/visual/Page_05.jpg')
+  hotspot3 = loadImage('assets/visual/Page_06.jpg')
+  hotspot4 = loadImage('assets/visual/Page_07.jpg')
+  hotspot5 = loadImage('assets/visual/Page_08.jpg')
+  hotspot6 = loadImage('assets/visual/Page_09.jpg')
 
   nose_spot = loadImage('assets/visual/nose_button.png')
   nose_spot_red = loadImage('assets/visual/nose_button_red.png')
@@ -290,16 +321,200 @@ function setup() {
   //adjust foreground voices so one on left one on right
   soundFileE4.pan(-1.0);
   soundFileF4.pan(0.0);
+
+  ///
+  /// GH
+
+  soundFileG1.disconnect(); // diconnect from p5 output
+  soundFileG1Gain = new p5.Gain(); // setup a gain node
+  soundFileG1Gain.setInput(soundFileG1); // connect the first sound to its input
+  soundFileG1Gain.connect(masterGain);
+
+  soundFileH1.disconnect(); // diconnect from p5 output
+  soundFileH1Gain = new p5.Gain(); // setup a gain node
+  soundFileH1Gain.setInput(soundFileH1); // connect the first sound to its input
+  soundFileH1Gain.connect(masterGain)
+    
+  //adjust foreground voices so one on left one on right
+  soundFileG1.pan(1.0);
+  soundFileH1.pan(0.0);
+
+  soundFileG2.disconnect(); // diconnect from p5 output
+  soundFileG2Gain = new p5.Gain(); // setup a gain node
+  soundFileG2Gain.setInput(soundFileG2); // connect the first sound to its input
+  soundFileG2Gain.connect(masterGain);
+
+  soundFileH2.disconnect(); // diconnect from p5 output
+  soundFileH2Gain = new p5.Gain(); // setup a gain node
+  soundFileH2Gain.setInput(soundFileH2); // connect the first sound to its input
+  soundFileH2Gain.connect(masterGain)
+
+  //adjust foreground voices so one on left one on right
+  soundFileG2.pan(0.5);
+  soundFileH2.pan(0.0);
+
+  soundFileG3.disconnect(); // diconnect from p5 output
+  soundFileG3Gain = new p5.Gain(); // setup a gain node
+  soundFileG3Gain.setInput(soundFileG3); // connect the first sound to its input
+  soundFileG3Gain.connect(masterGain);
+
+  soundFileH3.disconnect(); // diconnect from p5 output
+  soundFileH3Gain = new p5.Gain(); // setup a gain node
+  soundFileH3Gain.setInput(soundFileH3); // connect the first sound to its input
+  soundFileH3Gain.connect(masterGain)
+
+  //adjust foreground voices so one on left one on right
+  soundFileG3.pan(-0.5);
+  soundFileH3.pan(0.0);
+
+  soundFileG4.disconnect(); // diconnect from p5 output
+  soundFileG4Gain = new p5.Gain(); // setup a gain node
+  soundFileG4Gain.setInput(soundFileG4); // connect the first sound to its input
+  soundFileG4Gain.connect(masterGain);
+
+  soundFileH4.disconnect(); // diconnect from p5 output
+  soundFileH4Gain = new p5.Gain(); // setup a gain node
+  soundFileH4Gain.setInput(soundFileH4); // connect the first sound to its input
+  soundFileH4Gain.connect(masterGain)      
+
+  //adjust foreground voices so one on left one on right
+  soundFileG4.pan(-1.0);
+  soundFileH4.pan(0.0);
+
+  ///
+  /// IJ
+
+  soundFileI1.disconnect(); // diconnect from p5 output
+  soundFileI1Gain = new p5.Gain(); // setup a gain node
+  soundFileI1Gain.setInput(soundFileI1); // connect the first sound to its input
+  soundFileI1Gain.connect(masterGain);
+
+  soundFileJ1.disconnect(); // diconnect from p5 output
+  soundFileJ1Gain = new p5.Gain(); // setup a gain node
+  soundFileJ1Gain.setInput(soundFileJ1); // connect the first sound to its input
+  soundFileJ1Gain.connect(masterGain)
+    
+  //adjust foreground voices so one on left one on right
+  soundFileI1.pan(1.0);
+  soundFileJ1.pan(0.0);
+
+  soundFileI2.disconnect(); // diconnect from p5 output
+  soundFileI2Gain = new p5.Gain(); // setup a gain node
+  soundFileI2Gain.setInput(soundFileI2); // connect the first sound to its input
+  soundFileI2Gain.connect(masterGain);
+
+  soundFileJ2.disconnect(); // diconnect from p5 output
+  soundFileJ2Gain = new p5.Gain(); // setup a gain node
+  soundFileJ2Gain.setInput(soundFileJ2); // connect the first sound to its input
+  soundFileJ2Gain.connect(masterGain)
+
+  //adjust foreground voices so one on left one on right
+  soundFileI2.pan(0.5);
+  soundFileJ2.pan(0.0);
+
+  soundFileI3.disconnect(); // diconnect from p5 output
+  soundFileI3Gain = new p5.Gain(); // setup a gain node
+  soundFileI3Gain.setInput(soundFileI3); // connect the first sound to its input
+  soundFileI3Gain.connect(masterGain);
+
+  soundFileJ3.disconnect(); // diconnect from p5 output
+  soundFileJ3Gain = new p5.Gain(); // setup a gain node
+  soundFileJ3Gain.setInput(soundFileJ3); // connect the first sound to its input
+  soundFileJ3Gain.connect(masterGain)
+
+  //adjust foreground voices so one on left one on right
+  soundFileI3.pan(-0.5);
+  soundFileJ3.pan(0.0);
+
+  soundFileI4.disconnect(); // diconnect from p5 output
+  soundFileI4Gain = new p5.Gain(); // setup a gain node
+  soundFileI4Gain.setInput(soundFileI4); // connect the first sound to its input
+  soundFileI4Gain.connect(masterGain);
+
+  soundFileJ4.disconnect(); // diconnect from p5 output
+  soundFileJ4Gain = new p5.Gain(); // setup a gain node
+  soundFileJ4Gain.setInput(soundFileJ4); // connect the first sound to its input
+  soundFileJ4Gain.connect(masterGain)      
+
+  //adjust foreground voices so one on left one on right
+  soundFileI4.pan(-1.0);
+  soundFileJ4.pan(0.0);
+
+  ///
+  /// KL
+
+  soundFileK1.disconnect(); // diconnect from p5 output
+  soundFileK1Gain = new p5.Gain(); // setup a gain node
+  soundFileK1Gain.setInput(soundFileK1); // connect the first sound to its input
+  soundFileK1Gain.connect(masterGain);
+
+  soundFileL1.disconnect(); // diconnect from p5 output
+  soundFileL1Gain = new p5.Gain(); // setup a gain node
+  soundFileL1Gain.setInput(soundFileL1); // connect the first sound to its input
+  soundFileL1Gain.connect(masterGain)
+    
+  //adjust foreground voices so one on left one on right
+  soundFileK1.pan(1.0);
+  soundFileL1.pan(0.0);
+
+  soundFileK2.disconnect(); // diconnect from p5 output
+  soundFileK2Gain = new p5.Gain(); // setup a gain node
+  soundFileK2Gain.setInput(soundFileK2); // connect the first sound to its input
+  soundFileK2Gain.connect(masterGain);
+
+  soundFileL2.disconnect(); // diconnect from p5 output
+  soundFileL2Gain = new p5.Gain(); // setup a gain node
+  soundFileL2Gain.setInput(soundFileL2); // connect the first sound to its input
+  soundFileL2Gain.connect(masterGain)
+
+  //adjust foreground voices so one on left one on right
+  soundFileK2.pan(0.5);
+  soundFileL2.pan(0.0);
+
+  soundFileK3.disconnect(); // diconnect from p5 output
+  soundFileK3Gain = new p5.Gain(); // setup a gain node
+  soundFileK3Gain.setInput(soundFileK3); // connect the first sound to its input
+  soundFileK3Gain.connect(masterGain);
+
+  soundFileL3.disconnect(); // diconnect from p5 output
+  soundFileL3Gain = new p5.Gain(); // setup a gain node
+  soundFileL3Gain.setInput(soundFileL3); // connect the first sound to its input
+  soundFileL3Gain.connect(masterGain)
+
+  //adjust foreground voices so one on left one on right
+  soundFileK3.pan(-0.5);
+  soundFileL3.pan(0.0);
+
+  soundFileK4.disconnect(); // diconnect from p5 output
+  soundFileK4Gain = new p5.Gain(); // setup a gain node
+  soundFileK4Gain.setInput(soundFileK4); // connect the first sound to its input
+  soundFileK4Gain.connect(masterGain);
+
+  soundFileL4.disconnect(); // diconnect from p5 output
+  soundFileL4Gain = new p5.Gain(); // setup a gain node
+  soundFileL4Gain.setInput(soundFileL4); // connect the first sound to its input
+  soundFileL4Gain.connect(masterGain)      
+
+  //adjust foreground voices so one on left one on right
+  soundFileK4.pan(-1.0);
+  soundFileL4.pan(0.0);
 }
 
 function mousePressed() {
-  if (scene_num == 0) {
+  if (scene_num == 0 && first_time == 1) {
+    first_time = 0;
     let fs = fullscreen();
     fullscreen(!fs);
     resizeCanvas(displayWidth, displayHeight)
   }
   voices_on = false;
   scene_num++;
+  if (scene_num == 1) {
+    scene_start = millis();
+  }
+  if (scene_num == 12) {
+    scene_num = 0;
+  }
 }
 
 function draw() {
@@ -325,12 +540,26 @@ function draw() {
     case 5:
       scene3();
       break;
-      //
+
     case 6:
-      scene6();
+      scene3();
       break;
     case 7:
-      scene7();
+      scene3();
+      break;
+    case 8:
+      scene3();
+      break;
+        
+      //
+    case 9:
+      scene9();
+      break;
+    case 10:
+      scene10();
+      break;      
+    case 11:
+      scene11();
     default:
       //
   }
@@ -348,7 +577,9 @@ function scene1() {
     soundFileWindGain.amp(.5);
     wind_on = true;
   }
-  drawStatic();
+  if (millis() - scene_start > 3000) {
+    drawStatic();
+  }
 
 }
 
@@ -360,6 +591,7 @@ function scene2() {
     soundFileVoicesGain.amp(.5);
     backvoices_on = true;
   }
+
   drawStatic();
 
 }
@@ -387,6 +619,15 @@ function scene3() {
       break;
     case 5:
       background(hotspot3);
+      break;
+    case 6:
+      background(hotspot4);
+      break;
+    case 7:
+      background(hotspot5);
+      break;
+    case 8:
+      background(hotspot6);
       break;
     default:
       //
@@ -475,6 +716,15 @@ function scene3() {
       case 5:
         pan_sounds5();
         break;
+      case 6:
+        pan_sounds6();
+        break;
+      case 7:
+        pan_sounds7();
+        break;
+      case 8:
+        pan_sounds8();
+        break;        
       default:
         //
     }
@@ -723,22 +973,278 @@ function pan_sounds5() {
     masterGain.amp(soundVolume)
 }
 
-function scene6() {
-  background(bg_credits);
-  soundFileE1.fade(0,1)
-  soundFileF1.fade(0,1)
-  soundFileE2.fade(0,1)
-  soundFileF2.fade(0,1)
-  soundFileE3.fade(0,1)
-  soundFileF3.fade(0,1)
-  soundFileE4.fade(0,1)
-  soundFileF4.fade(0,1)
-  drawStatic();
 
+function pan_sounds6() {
+
+
+    //select sound and start
+    if (!voices_on) {
+      soundFileE1.fade(0,1)
+      soundFileF1.fade(0,1)
+      soundFileE2.fade(0,1)
+      soundFileF2.fade(0,1)
+      soundFileE3.fade(0,1)
+      soundFileF3.fade(0,1)
+      soundFileE4.fade(0,1)
+      soundFileF4.fade(0,1)
+
+      soundFileG1Gain.amp(0);
+      soundFileH1Gain.amp(0);
+      soundFileG2Gain.amp(0);
+      soundFileH2Gain.amp(0);
+      soundFileG3Gain.amp(0);
+      soundFileH3Gain.amp(0);
+      soundFileG4Gain.amp(0);
+      soundFileH4Gain.amp(0);      
+      soundFileG1.loop()
+      soundFileH1.loop()
+      soundFileG2.loop()
+      soundFileH2.loop() 
+      soundFileG3.loop()
+      soundFileH3.loop() 
+      soundFileG4.loop()
+      soundFileH4.loop()     
+      voices_on = true;
+    }
+
+    //get nose position 
+    gazeX = constrain(outputX, 0, width);
+    voicebalance = map(gazeX, 0, width, 0, 1);
+    
+    //adjust relative sound amplitude based on gaze location
+
+    if (voicebalance < .25) {
+      soundFileG1Gain.amp(1);
+      soundFileH1Gain.amp(1-outputSmile);
+      soundFileG2Gain.amp(0);
+      soundFileH2Gain.amp(0);
+      soundFileG3Gain.amp(0);
+      soundFileH3Gain.amp(0);
+      soundFileG4Gain.amp(0);
+      soundFileH4Gain.amp(0);
+    } else if (voicebalance >= .25 && voicebalance < .50) {
+      soundFileG1Gain.amp(0);
+      soundFileH1Gain.amp(0);
+      soundFileG2Gain.amp(1);
+      soundFileH2Gain.amp(1-outputSmile);
+      soundFileG3Gain.amp(0);
+      soundFileH3Gain.amp(0);
+      soundFileG4Gain.amp(0);
+      soundFileH4Gain.amp(0);
+    } else if (voicebalance >= .50 && voicebalance < .75) {
+      soundFileG1Gain.amp(0);
+      soundFileH1Gain.amp(0);
+      soundFileG2Gain.amp(0);
+      soundFileH2Gain.amp(0);
+      soundFileG3Gain.amp(1);
+      soundFileH3Gain.amp(1-outputSmile);
+      soundFileG4Gain.amp(0);
+      soundFileH4Gain.amp(0);    
+    } else {
+      soundFileG1Gain.amp(0);
+      soundFileH1Gain.amp(0);
+      soundFileG2Gain.amp(0);
+      soundFileH2Gain.amp(0);
+      soundFileG3Gain.amp(0);
+      soundFileH3Gain.amp(0);
+      soundFileG4Gain.amp(1);
+      soundFileH4Gain.amp(1-outputSmile);      
+    }
+
+   
+    //adjust foreground voices based on proximity
+    soundVolume = constrain(outputArea, 0, 1);
+    masterGain.amp(soundVolume)
 }
 
-function scene7() {
+
+function pan_sounds7() {
+
+
+    //select sound and start
+    if (!voices_on) {
+      soundFileG1.fade(0,1)
+      soundFileH1.fade(0,1)
+      soundFileG2.fade(0,1)
+      soundFileH2.fade(0,1)
+      soundFileG3.fade(0,1)
+      soundFileH3.fade(0,1)
+      soundFileG4.fade(0,1)
+      soundFileH4.fade(0,1)
+
+      soundFileI1Gain.amp(0);
+      soundFileJ1Gain.amp(0);
+      soundFileI2Gain.amp(0);
+      soundFileJ2Gain.amp(0);
+      soundFileI3Gain.amp(0);
+      soundFileJ3Gain.amp(0);
+      soundFileI4Gain.amp(0);
+      soundFileJ4Gain.amp(0);      
+      soundFileI1.loop()
+      soundFileJ1.loop()
+      soundFileI2.loop()
+      soundFileJ2.loop() 
+      soundFileI3.loop()
+      soundFileJ3.loop() 
+      soundFileI4.loop()
+      soundFileJ4.loop()     
+      voices_on = true;
+    }
+
+    //get nose position 
+    gazeX = constrain(outputX, 0, width);
+    voicebalance = map(gazeX, 0, width, 0, 1);
+    
+    //adjust relative sound amplitude based on gaze location
+
+    if (voicebalance < .25) {
+      soundFileI1Gain.amp(1);
+      soundFileJ1Gain.amp(1-outputSmile);
+      soundFileI2Gain.amp(0);
+      soundFileJ2Gain.amp(0);
+      soundFileI3Gain.amp(0);
+      soundFileJ3Gain.amp(0);
+      soundFileI4Gain.amp(0);
+      soundFileJ4Gain.amp(0);
+    } else if (voicebalance >= .25 && voicebalance < .50) {
+      soundFileI1Gain.amp(0);
+      soundFileJ1Gain.amp(0);
+      soundFileI2Gain.amp(1);
+      soundFileJ2Gain.amp(1-outputSmile);
+      soundFileI3Gain.amp(0);
+      soundFileJ3Gain.amp(0);
+      soundFileI4Gain.amp(0);
+      soundFileJ4Gain.amp(0);
+    } else if (voicebalance >= .50 && voicebalance < .75) {
+      soundFileI1Gain.amp(0);
+      soundFileJ1Gain.amp(0);
+      soundFileI2Gain.amp(0);
+      soundFileJ2Gain.amp(0);
+      soundFileI3Gain.amp(1);
+      soundFileJ3Gain.amp(1-outputSmile);
+      soundFileI4Gain.amp(0);
+      soundFileJ4Gain.amp(0);    
+    } else {
+      soundFileI1Gain.amp(0);
+      soundFileJ1Gain.amp(0);
+      soundFileI2Gain.amp(0);
+      soundFileJ2Gain.amp(0);
+      soundFileI3Gain.amp(0);
+      soundFileJ3Gain.amp(0);
+      soundFileI4Gain.amp(1);
+      soundFileJ4Gain.amp(1-outputSmile);      
+    }
+
+   
+    //adjust foreground voices based on proximity
+    soundVolume = constrain(outputArea, 0, 1);
+    masterGain.amp(soundVolume)
+}
+
+
+function pan_sounds8() {
+
+
+    //select sound and start
+    if (!voices_on) {
+      soundFileI1.fade(0,1)
+      soundFileJ1.fade(0,1)
+      soundFileI2.fade(0,1)
+      soundFileJ2.fade(0,1)
+      soundFileI3.fade(0,1)
+      soundFileJ3.fade(0,1)
+      soundFileI4.fade(0,1)
+      soundFileJ4.fade(0,1)
+
+      soundFileK1Gain.amp(0);
+      soundFileL1Gain.amp(0);
+      soundFileK2Gain.amp(0);
+      soundFileL2Gain.amp(0);
+      soundFileK3Gain.amp(0);
+      soundFileL3Gain.amp(0);
+      soundFileK4Gain.amp(0);
+      soundFileL4Gain.amp(0);      
+      soundFileK1.loop()
+      soundFileL1.loop()
+      soundFileK2.loop()
+      soundFileL2.loop() 
+      soundFileK3.loop()
+      soundFileL3.loop() 
+      soundFileK4.loop()
+      soundFileL4.loop()     
+      voices_on = true;
+    }
+
+    //get nose position 
+    gazeX = constrain(outputX, 0, width);
+    voicebalance = map(gazeX, 0, width, 0, 1);
+    
+    //adjust relative sound amplitude based on gaze location
+
+    if (voicebalance < .25) {
+      soundFileK1Gain.amp(1);
+      soundFileL1Gain.amp(1-outputSmile);
+      soundFileK2Gain.amp(0);
+      soundFileL2Gain.amp(0);
+      soundFileK3Gain.amp(0);
+      soundFileL3Gain.amp(0);
+      soundFileK4Gain.amp(0);
+      soundFileL4Gain.amp(0);
+    } else if (voicebalance >= .25 && voicebalance < .50) {
+      soundFileK1Gain.amp(0);
+      soundFileL1Gain.amp(0);
+      soundFileK2Gain.amp(1);
+      soundFileL2Gain.amp(1-outputSmile);
+      soundFileK3Gain.amp(0);
+      soundFileL3Gain.amp(0);
+      soundFileK4Gain.amp(0);
+      soundFileL4Gain.amp(0);
+    } else if (voicebalance >= .50 && voicebalance < .75) {
+      soundFileK1Gain.amp(0);
+      soundFileL1Gain.amp(0);
+      soundFileK2Gain.amp(0);
+      soundFileL2Gain.amp(0);
+      soundFileK3Gain.amp(1);
+      soundFileL3Gain.amp(1-outputSmile);
+      soundFileK4Gain.amp(0);
+      soundFileL4Gain.amp(0);    
+    } else {
+      soundFileK1Gain.amp(0);
+      soundFileL1Gain.amp(0);
+      soundFileK2Gain.amp(0);
+      soundFileL2Gain.amp(0);
+      soundFileK3Gain.amp(0);
+      soundFileL3Gain.amp(0);
+      soundFileK4Gain.amp(1);
+      soundFileL4Gain.amp(1-outputSmile);      
+    }
+
+  
+    //adjust foreground voices based on proximity
+    soundVolume = constrain(outputArea, 0, 1);
+    masterGain.amp(soundVolume)
+}
+
+function scene9() {
+  background(bg_credits);
+  soundFileK1.fade(0,1)
+  soundFileL1.fade(0,1)
+  soundFileK2.fade(0,1)
+  soundFileL2.fade(0,1)
+  soundFileK3.fade(0,1)
+  soundFileL3.fade(0,1)
+  soundFileK4.fade(0,1)
+  soundFileL4.fade(0,1)
+  drawStatic();
+}
+
+function scene10() {
+  background(bg_credits2);
+  drawStatic();
+}
+
+function scene11() {
+  background(bg_outro);
   soundFileWind.fade(0,1)
   soundFileVoices.fade(0,1)
-
 }
