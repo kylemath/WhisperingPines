@@ -11,6 +11,7 @@ let wind_on = false;
 let backvoices_on = false;
 let voices_on = false;
 let first_time = 1; // to only maximize on first time
+let sceneTimerStart = 1;
 
 function preload() {
   soundFormats('mp3', 'ogg');
@@ -125,6 +126,11 @@ function setup() {
   classifier = new emotionClassifier();
   classifier.init(emotionModel);
   emotionData = classifier.getBlank();
+
+  setupSounds();
+}
+
+function setupSounds() {
 
   // setup background gain
   backgroundGain = new p5.Gain();
@@ -497,7 +503,7 @@ function setup() {
 
   //adjust foreground voices so one on left one on right
   soundFileK4.pan(-1.0);
-  soundFileL4.pan(0.0);
+  soundFileL4.pan(0.0);  
 }
 
 function mousePressed() {
@@ -509,13 +515,15 @@ function mousePressed() {
   }
   voices_on = false;
   scene_num++;
+  sceneTimerStart = 1;
   if (scene_num == 1) {
     scene_start = millis();
   }
   if (scene_num == 12) {
-    scene_num = 0;
+    window.location.reload();
   }
 }
+
 
 function draw() {
 
@@ -530,6 +538,7 @@ function draw() {
     case 2:
       scene2();
       break;
+
       // Main scenes
     case 3:
       scene3();
@@ -551,7 +560,7 @@ function draw() {
       scene3();
       break;
         
-      //
+      //Outros
     case 9:
       scene9();
       break;
@@ -566,10 +575,12 @@ function draw() {
 }
 
 function scene0() {
+  autoAdvance();
   background(bg_title);
 }
 
 function scene1() {
+  autoAdvance();
   background(bg_cam);
   if (!wind_on) {
     soundFileWind.loop()
@@ -584,6 +595,7 @@ function scene1() {
 }
 
 function scene2() {
+  autoAdvance();
   background(bg_intro);
   if (!backvoices_on) {
     soundFileVoices.loop()
@@ -606,9 +618,26 @@ function drawStatic() {
   }
 }
 
+function autoAdvance() {
+  if (sceneTimerStart == 1) {
+    sceneTimerStart = 0;
+    scene_start = millis();
+  }
+
+  // auto advance after 180 seconds
+  if (millis() - scene_start > 180000) { 
+    scene_num++;
+    sceneTimerStart = 1;
+    if (scene_num == 12) {
+      window.location.reload();
+    }
+  }
+}
 
 function scene3() {
   //put hotspot background on
+
+  autoAdvance();
 
   switch(scene_num) {
     case 3:
@@ -1226,6 +1255,7 @@ function pan_sounds8() {
 }
 
 function scene9() {
+  autoAdvance();
   background(bg_credits);
   soundFileK1.fade(0,1)
   soundFileL1.fade(0,1)
@@ -1239,11 +1269,13 @@ function scene9() {
 }
 
 function scene10() {
+  autoAdvance();
   background(bg_credits2);
   drawStatic();
 }
 
 function scene11() {
+  autoAdvance();
   background(bg_outro);
   soundFileWind.fade(0,1)
   soundFileVoices.fade(0,1)
