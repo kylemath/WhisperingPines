@@ -6,7 +6,6 @@ let outputSmile = 0;
 let soundFile;
 let panning; 
 let scene_num = 0; // index of which screen of the UX flow you are in
-let j = 0;
 let wind_on = false;
 let backvoices_on = false;
 let voices_on = false;
@@ -104,6 +103,8 @@ function preload() {
   nose_spot_red = loadImage('assets/visual/nose_button_red.png')
   nose_spot_green = loadImage('assets/visual/nose_button_green.png')
 
+  setupSounds();
+
 }
 
 function setup() {
@@ -127,7 +128,6 @@ function setup() {
   classifier.init(emotionModel);
   emotionData = classifier.getBlank();
 
-  setupSounds();
 }
 
 function setupSounds() {
@@ -520,10 +520,134 @@ function mousePressed() {
     scene_start = millis();
   }
   if (scene_num == 12) {
-    window.location.reload();
+    restartShow();
   }
 }
 
+function autoAdvance() {
+  if (sceneTimerStart == 1) {
+    sceneTimerStart = 0;
+    scene_start = millis();
+  }
+
+  // auto advance after 180 seconds
+  if (millis() - scene_start > 180000) { 
+    scene_num++;
+    sceneTimerStart = 1;
+    if (scene_num == 12) {
+      restartShow();
+    }
+  }
+}
+
+function restartShow() {
+  scene_num = 0;
+  wind_on = false;
+  backvoices_on = false;
+  voices_on = false;  
+
+  soundFileWind.fade(1,0);
+  soundFileVoices.fade(1,0);
+  soundFileA1.fade(1,0);
+  soundFileA2.fade(1,0);
+  soundFileA3.fade(1,0);
+  soundFileA4.fade(1,0);
+  soundFileB1.fade(1,0);
+  soundFileB2.fade(1,0);
+  soundFileB3.fade(1,0);
+  soundFileB4.fade(1,0);
+  soundFileC1.fade(1,0);
+  soundFileC2.fade(1,0);
+  soundFileC3.fade(1,0);
+  soundFileC4.fade(1,0);
+  soundFileD1.fade(1,0);
+  soundFileD2.fade(1,0);
+  soundFileD3.fade(1,0);
+  soundFileD4.fade(1,0);
+  soundFileE1.fade(1,0);
+  soundFileE2.fade(1,0);
+  soundFileE3.fade(1,0);
+  soundFileE4.fade(1,0);
+  soundFileF1.fade(1,0);
+  soundFileF2.fade(1,0);
+  soundFileF3.fade(1,0);
+  soundFileF4.fade(1,0);
+  soundFileG1.fade(1,0);
+  soundFileG2.fade(1,0);
+  soundFileG3.fade(1,0);
+  soundFileG4.fade(1,0);
+  soundFileH1.fade(1,0);
+  soundFileH2.fade(1,0);
+  soundFileH3.fade(1,0);
+  soundFileH4.fade(1,0);
+  soundFileI1.fade(1,0);
+  soundFileI2.fade(1,0);
+  soundFileI3.fade(1,0);
+  soundFileI4.fade(1,0);
+  soundFileJ1.fade(1,0);
+  soundFileJ2.fade(1,0);
+  soundFileJ3.fade(1,0);
+  soundFileJ4.fade(1,0);
+  soundFileK1.fade(1,0);
+  soundFileK2.fade(1,0);
+  soundFileK3.fade(1,0);
+  soundFileK4.fade(1,0);
+  soundFileL1.fade(1,0);
+  soundFileL2.fade(1,0);
+  soundFileL3.fade(1,0);
+  soundFileL4.fade(1,0);
+
+  soundFileWind.stop();
+  soundFileVoices.stop();
+  soundFileA1.stop();
+  soundFileA2.stop();
+  soundFileA3.stop();
+  soundFileA4.stop();
+  soundFileB1.stop();
+  soundFileB2.stop();
+  soundFileB3.stop();
+  soundFileB4.stop();
+  soundFileC1.stop();
+  soundFileC2.stop();
+  soundFileC3.stop();
+  soundFileC4.stop();
+  soundFileD1.stop();
+  soundFileD2.stop();
+  soundFileD3.stop();
+  soundFileD4.stop();
+  soundFileE1.stop();
+  soundFileE2.stop();
+  soundFileE3.stop();
+  soundFileE4.stop();
+  soundFileF1.stop();
+  soundFileF2.stop();
+  soundFileF3.stop();
+  soundFileF4.stop();
+  soundFileG1.stop();
+  soundFileG2.stop();
+  soundFileG3.stop();
+  soundFileG4.stop();
+  soundFileH1.stop();
+  soundFileH2.stop();
+  soundFileH3.stop();
+  soundFileH4.stop();
+  soundFileI1.stop();
+  soundFileI2.stop();
+  soundFileI3.stop();
+  soundFileI4.stop();
+  soundFileJ1.stop();
+  soundFileJ2.stop();
+  soundFileJ3.stop();
+  soundFileJ4.stop();
+  soundFileK1.stop();
+  soundFileK2.stop();
+  soundFileK3.stop();
+  soundFileK4.stop();
+  soundFileL1.stop();
+  soundFileL2.stop();
+  soundFileL3.stop();
+  soundFileL4.stop();      
+}
 
 function draw() {
 
@@ -618,22 +742,6 @@ function drawStatic() {
   }
 }
 
-function autoAdvance() {
-  if (sceneTimerStart == 1) {
-    sceneTimerStart = 0;
-    scene_start = millis();
-  }
-
-  // auto advance after 180 seconds
-  if (millis() - scene_start > 180000) { 
-    scene_num++;
-    sceneTimerStart = 1;
-    if (scene_num == 12) {
-      window.location.reload();
-    }
-  }
-}
-
 function scene3() {
   //put hotspot background on
 
@@ -681,14 +789,14 @@ function scene3() {
 
     // check on smile
     outputSmile = emotionRecognition[5].value;
-    console.log(emotionRecognition);
+    // console.log(emotionRecognition);
     // 0: {emotion: "angry", value: 0.05873836091453903}
     // 1: {emotion: "disgusted", value: 0.006970389350505129}
     // 2: {emotion: "fear", value: 0.007838597025081209}
     // 3: {emotion: "sad", value: 0.3644606514967711}
     // 4: {emotion: "surprised", value: 0.006303609805024607}
     // 5: {emotion: "happy", value: 0.02721371664183402}
-    console.log('Smile = ' + round(outputSmile * 100) + '%')
+    // console.log('Smile = ' + round(outputSmile * 100) + '%')
 
     // calculate face size
     let minX = width;
@@ -713,7 +821,7 @@ function scene3() {
     boxHeight = maxY - minY;
     outputArea = (boxWidth * boxHeight) / (width * height);
     proximity = round(outputArea * 100);
-    console.log('Proximity = ' + round(outputArea * 100) + '%')
+    // console.log('Proximity = ' + round(outputArea * 100) + '%')
 
     // Draw box on face
     push();
