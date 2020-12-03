@@ -699,7 +699,6 @@ function draw() {
 }
 
 function scene0() {
-  autoAdvance();
   background(bg_title);
 }
 
