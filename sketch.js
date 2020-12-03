@@ -135,7 +135,7 @@ function setupSounds() {
   // setup background gain
   backgroundGain = new p5.Gain();
   backgroundGain.connect();
-  backgroundGain.amp(.1); 
+  backgroundGain.amp(.2); 
 
   soundFileWind.disconnect();
   soundFileWindGain = new p5.Gain();
@@ -819,9 +819,8 @@ function scene3() {
     boxWidth = maxX - minX;
     boxHeight = maxY - minY;
     outputArea = (boxWidth * boxHeight) / (width * height);
-    proximity = round(outputArea * 100);
-    // console.log('Proximity = ' + round(outputArea * 100) + '%')
-
+    outputArea = outputArea + .35;
+ 
     // Draw box on face
     push();
     noFill()
