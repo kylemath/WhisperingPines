@@ -12,7 +12,7 @@ let voices_on = false;
 let first_time = 1; // to only maximize on first time
 let sceneTimerStart = true; // for auto advance after x time
 
-let autoadvance_delay = 6; // seconds
+let autoadvance_delay = 180; // seconds
 
 function mousePressed() {
   if (scene_num == 0 && first_time == 1) {
