@@ -10,7 +10,152 @@ let wind_on = false;
 let backvoices_on = false;
 let voices_on = false;
 let first_time = 1; // to only maximize on first time
-let sceneTimerStart = 1;
+let sceneTimerStart = true; // for auto advance after x time
+
+let autoadvance_delay = 6; // seconds
+
+function mousePressed() {
+  if (scene_num == 0 && first_time == 1) {
+    first_time = 0;
+    let fs = fullscreen();
+    fullscreen(!fs);
+    resizeCanvas(displayWidth, displayHeight)
+  }
+  if (scene_num == 0) {
+    scene_start = millis();
+  }
+  voices_on = false;
+  scene_num++;
+  sceneTimerStart = true;
+  if (scene_num == 12) {
+    restartShow();
+  }
+}
+
+function autoAdvance() {
+  if (sceneTimerStart) {
+    scene_start = millis();
+    sceneTimerStart = false;
+  }
+
+  // auto advance after 180 seconds
+  if (millis() - scene_start > (autoadvance_delay * 1000)) { 
+    voices_on = false;
+    scene_num++;
+    sceneTimerStart = true;
+    if (scene_num == 12) {
+      restartShow();
+    }
+  }
+}
+
+function restartShow() {
+  scene_num = 0;
+  wind_on = false;
+  backvoices_on = false;
+  voices_on = false;  
+
+  soundFileWind.stop();
+  soundFileVoices.stop();
+
+  soundFileA1.fade(1,0);
+  soundFileA2.fade(1,0);
+  soundFileA3.fade(1,0);
+  soundFileA4.fade(1,0);
+  soundFileB1.fade(1,0);
+  soundFileB2.fade(1,0);
+  soundFileB3.fade(1,0);
+  soundFileB4.fade(1,0);
+  soundFileC1.fade(1,0);
+  soundFileC2.fade(1,0);
+  soundFileC3.fade(1,0);
+  soundFileC4.fade(1,0);
+  soundFileD1.fade(1,0);
+  soundFileD2.fade(1,0);
+  soundFileD3.fade(1,0);
+  soundFileD4.fade(1,0);
+  soundFileE1.fade(1,0);
+  soundFileE2.fade(1,0);
+  soundFileE3.fade(1,0);
+  soundFileE4.fade(1,0);
+  soundFileF1.fade(1,0);
+  soundFileF2.fade(1,0);
+  soundFileF3.fade(1,0);
+  soundFileF4.fade(1,0);
+  soundFileG1.fade(1,0);
+  soundFileG2.fade(1,0);
+  soundFileG3.fade(1,0);
+  soundFileG4.fade(1,0);
+  soundFileH1.fade(1,0);
+  soundFileH2.fade(1,0);
+  soundFileH3.fade(1,0);
+  soundFileH4.fade(1,0);
+  soundFileI1.fade(1,0);
+  soundFileI2.fade(1,0);
+  soundFileI3.fade(1,0);
+  soundFileI4.fade(1,0);
+  soundFileJ1.fade(1,0);
+  soundFileJ2.fade(1,0);
+  soundFileJ3.fade(1,0);
+  soundFileJ4.fade(1,0);
+  soundFileK1.fade(1,0);
+  soundFileK2.fade(1,0);
+  soundFileK3.fade(1,0);
+  soundFileK4.fade(1,0);
+  soundFileL1.fade(1,0);
+  soundFileL2.fade(1,0);
+  soundFileL3.fade(1,0);
+  soundFileL4.fade(1,0); 
+
+  soundFileA1.stop();
+  soundFileA2.stop();
+  soundFileA3.stop();
+  soundFileA4.stop();
+  soundFileB1.stop();
+  soundFileB2.stop();
+  soundFileB3.stop();
+  soundFileB4.stop();
+  soundFileC1.stop();
+  soundFileC2.stop();
+  soundFileC3.stop();
+  soundFileC4.stop();
+  soundFileD1.stop();
+  soundFileD2.stop();
+  soundFileD3.stop();
+  soundFileD4.stop();
+  soundFileE1.stop();
+  soundFileE2.stop();
+  soundFileE3.stop();
+  soundFileE4.stop();
+  soundFileF1.stop();
+  soundFileF2.stop();
+  soundFileF3.stop();
+  soundFileF4.stop();
+  soundFileG1.stop();
+  soundFileG2.stop();
+  soundFileG3.stop();
+  soundFileG4.stop();
+  soundFileH1.stop();
+  soundFileH2.stop();
+  soundFileH3.stop();
+  soundFileH4.stop();
+  soundFileI1.stop();
+  soundFileI2.stop();
+  soundFileI3.stop();
+  soundFileI4.stop();
+  soundFileJ1.stop();
+  soundFileJ2.stop();
+  soundFileJ3.stop();
+  soundFileJ4.stop();
+  soundFileK1.stop();
+  soundFileK2.stop();
+  soundFileK3.stop();
+  soundFileK4.stop();
+  soundFileL1.stop();
+  soundFileL2.stop();
+  soundFileL3.stop();
+  soundFileL4.stop();      
+}
 
 function preload() {
   soundFormats('mp3', 'ogg');
@@ -80,7 +225,6 @@ function preload() {
   soundFileL2 = loadSound('assets/auditory/viola/VIola_22.mp3');
   soundFileL3 = loadSound('assets/auditory/viola/VIola_23.mp3');
   soundFileL4 = loadSound('assets/auditory/viola/VIola_24.mp3');
-
 
   soundFileWind = loadSound('assets/auditory/wind_only.mp3')
   soundFileVoices = loadSound('assets/auditory/all voices_only.mp3')
@@ -506,148 +650,6 @@ function setupSounds() {
   soundFileL4.pan(0.0);  
 }
 
-function mousePressed() {
-  if (scene_num == 0 && first_time == 1) {
-    first_time = 0;
-    let fs = fullscreen();
-    fullscreen(!fs);
-    resizeCanvas(displayWidth, displayHeight)
-  }
-  voices_on = false;
-  scene_num++;
-  sceneTimerStart = 1;
-  if (scene_num == 1) {
-    scene_start = millis();
-  }
-  if (scene_num == 12) {
-    restartShow();
-  }
-}
-
-function autoAdvance() {
-  if (sceneTimerStart == 1) {
-    sceneTimerStart = 0;
-    scene_start = millis();
-  }
-
-  // auto advance after 180 seconds
-  if (millis() - scene_start > 180000) { 
-    scene_num++;
-    sceneTimerStart = 1;
-    if (scene_num == 12) {
-      restartShow();
-    }
-  }
-}
-
-function restartShow() {
-  scene_num = 0;
-  wind_on = false;
-  backvoices_on = false;
-  voices_on = false;  
-
-  soundFileWind.fade(1,0);
-  soundFileVoices.fade(1,0);
-  soundFileA1.fade(1,0);
-  soundFileA2.fade(1,0);
-  soundFileA3.fade(1,0);
-  soundFileA4.fade(1,0);
-  soundFileB1.fade(1,0);
-  soundFileB2.fade(1,0);
-  soundFileB3.fade(1,0);
-  soundFileB4.fade(1,0);
-  soundFileC1.fade(1,0);
-  soundFileC2.fade(1,0);
-  soundFileC3.fade(1,0);
-  soundFileC4.fade(1,0);
-  soundFileD1.fade(1,0);
-  soundFileD2.fade(1,0);
-  soundFileD3.fade(1,0);
-  soundFileD4.fade(1,0);
-  soundFileE1.fade(1,0);
-  soundFileE2.fade(1,0);
-  soundFileE3.fade(1,0);
-  soundFileE4.fade(1,0);
-  soundFileF1.fade(1,0);
-  soundFileF2.fade(1,0);
-  soundFileF3.fade(1,0);
-  soundFileF4.fade(1,0);
-  soundFileG1.fade(1,0);
-  soundFileG2.fade(1,0);
-  soundFileG3.fade(1,0);
-  soundFileG4.fade(1,0);
-  soundFileH1.fade(1,0);
-  soundFileH2.fade(1,0);
-  soundFileH3.fade(1,0);
-  soundFileH4.fade(1,0);
-  soundFileI1.fade(1,0);
-  soundFileI2.fade(1,0);
-  soundFileI3.fade(1,0);
-  soundFileI4.fade(1,0);
-  soundFileJ1.fade(1,0);
-  soundFileJ2.fade(1,0);
-  soundFileJ3.fade(1,0);
-  soundFileJ4.fade(1,0);
-  soundFileK1.fade(1,0);
-  soundFileK2.fade(1,0);
-  soundFileK3.fade(1,0);
-  soundFileK4.fade(1,0);
-  soundFileL1.fade(1,0);
-  soundFileL2.fade(1,0);
-  soundFileL3.fade(1,0);
-  soundFileL4.fade(1,0);
-
-  soundFileWind.stop();
-  soundFileVoices.stop();
-  soundFileA1.stop();
-  soundFileA2.stop();
-  soundFileA3.stop();
-  soundFileA4.stop();
-  soundFileB1.stop();
-  soundFileB2.stop();
-  soundFileB3.stop();
-  soundFileB4.stop();
-  soundFileC1.stop();
-  soundFileC2.stop();
-  soundFileC3.stop();
-  soundFileC4.stop();
-  soundFileD1.stop();
-  soundFileD2.stop();
-  soundFileD3.stop();
-  soundFileD4.stop();
-  soundFileE1.stop();
-  soundFileE2.stop();
-  soundFileE3.stop();
-  soundFileE4.stop();
-  soundFileF1.stop();
-  soundFileF2.stop();
-  soundFileF3.stop();
-  soundFileF4.stop();
-  soundFileG1.stop();
-  soundFileG2.stop();
-  soundFileG3.stop();
-  soundFileG4.stop();
-  soundFileH1.stop();
-  soundFileH2.stop();
-  soundFileH3.stop();
-  soundFileH4.stop();
-  soundFileI1.stop();
-  soundFileI2.stop();
-  soundFileI3.stop();
-  soundFileI4.stop();
-  soundFileJ1.stop();
-  soundFileJ2.stop();
-  soundFileJ3.stop();
-  soundFileJ4.stop();
-  soundFileK1.stop();
-  soundFileK2.stop();
-  soundFileK3.stop();
-  soundFileK4.stop();
-  soundFileL1.stop();
-  soundFileL2.stop();
-  soundFileL3.stop();
-  soundFileL4.stop();      
-}
 
 function draw() {
 
@@ -709,6 +711,7 @@ function scene1() {
     soundFileWind.loop()
     soundFileWind.pan(0);
     soundFileWindGain.amp(.5);
+    soundFileWind.fade(1,1)
     wind_on = true;
   }
   if (millis() - scene_start > 3000) {
@@ -724,6 +727,7 @@ function scene2() {
     soundFileVoices.loop()
     soundFileVoices.pan(0);
     soundFileVoicesGain.amp(.5);
+    soundFileVoices.fade(1,1)
     backvoices_on = true;
   }
 
