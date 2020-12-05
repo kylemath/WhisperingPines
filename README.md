@@ -1,47 +1,8 @@
 # StoryTrees
 Webcam Responsive AudioVisual Art
 
-Collaboration with Don Hill: http://appropriate-entertainment.com/
+By Don Hill: http://appropriate-entertainment.com/
 
-Demo: https://kylemath.github.io/WhisperingPines/
-
-Try in live Editor at: https://editor.p5js.org/kylemath@gmail.com/sketches/XG8mgwaMc
-
-![Example](webcamExample2.png)
-
-# Sound examples
-
-https://p5js.org/reference/#/p5.Gain
-
-https://editor.p5js.org/kylemath@gmail.com/sketches/2ttNC5M6v
-
-# References
- https://github.com/serghov/heartRate/blob/master/index.js
- 
- https://github.com/gfwilliams/HeartRate/blob/gh-pages/index.html
- 
-State of the Art Algorithms: https://github.com/danmcduff/iphys-toolbox/
-
-https://github.com/camilleanne/pulse
-
-Head direction tracking eg. https://editor.p5js.org/mrbombmusic/sketches/ByDs3yqyV
-
-clm face tracking: https://editor.p5js.org/Emceelamb/sketches/rypGIAV1E
-clm emotion: https://github.com/pseudospencer/emojiCV/blob/master/build6/sketch.js
- in editor: https://editor.p5js.org/guillaume_slizewicz/sketches/HJaL7i3zV
-https://github.com/pseudospencer/emojiCV
+Demo: https://storytrees.github.io/storytrees/
 
 
-# Components
-
-Webcam Smile Tracker:
-https://editor.p5js.org/kylemath@gmail.com/sketches/gpgtQaUEH
-
-Webcam Gaze Tracker:
-https://editor.p5js.org/kylemath@gmail.com/sketches/mew4fm6q5
-
-FractalTree:
-https://editor.p5js.org/kylemath@gmail.com/sketches/P1pKbFdSi
-
-Webcam FaceTracker:
-https://editor.p5js.org/kylemath@gmail.com/sketches/CqdFehF69
