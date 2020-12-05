@@ -1,4 +1,4 @@
-# WhisperingPines
+# StoryTrees
 Webcam Responsive AudioVisual Art
 
 Collaboration with Don Hill: http://appropriate-entertainment.com/
